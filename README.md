@@ -1,18 +1,18 @@
-# Project Name
+# Booking Module for AirbnBusy Project
 
 > Recreating Airbnb's Booking Module on an Airbnb listing page.
 
 Step 1 - Booking Module on screen load
-![ScreenShot](/misc/onScreenLoadShot.png)
+![ScreenShot](/misc/onScreenLoadShot.png)<!-- .element height="40%" width="40%" -->
 
 Step 2 - On Check In Selection
-![ScreenShot](/misc/onCheckInDateShot.png)
+![ScreenShot](/misc/onCheckInDateShot.png)<!-- .element height="40%" width="40%" -->
 
 Step 3 - On Check Out Date Selection
-![ScreenShot](/misc/onCheckOutDateShot.png)
+![ScreenShot](/misc/onCheckOutDateShot.png)<!-- .element height="40%" width="40%" -->
 
 Step 4 - Post Chosen Date Range Summary Page
-![ScreenShot](/misc/postChosenDateRangeShot.png)
+![ScreenShot](/misc/postChosenDateRangeShot.png)<!-- .element height="40%" width="40%" -->
 
 ## Related Projects
 
