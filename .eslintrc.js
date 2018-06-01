@@ -1,3 +1,7 @@
 module.exports = { 
-  extends: 'airbnb-base' 
+  extends: 'airbnb',
+  "env": {
+    "browser": true,
+    "node": true
+  }
 };
