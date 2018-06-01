@@ -5,5 +5,11 @@ module.exports = {
     "node": true,
     "jest/globals": true,
   },
-  "plugins": ["jest", "import", "jsx-a11y", "react"],
+  "plugins": [
+    "jest", 
+    "import", 
+    "jsx-a11y", 
+    "react",
+    "sql"
+  ],
 };
