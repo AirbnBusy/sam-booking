@@ -8,14 +8,18 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "nodemon server/server.js",
     "react-dev": "webpack -d --watch",
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "webpack": "^4.10.2",
     "webpack-cli": "^2.1.4"
   },
