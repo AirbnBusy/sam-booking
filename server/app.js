@@ -13,7 +13,7 @@ app.get('/listings/:listingId', (req, res) => {
 });
 
 app.get('/api/listings/:listingId', (req, res) => {
-  db.getAllUnavailableDates(req.params.listingId)
+  db.getListingInfo(req.params.listingId)
     .then((rows) => {
       console.log(rows);
     })
@@ -23,7 +23,19 @@ app.get('/api/listings/:listingId', (req, res) => {
 });
 
 app.get('/api/listings/:listingId/calendar/:yearMonth', (req, res) => {
-  res.send(req.params);
+  db.getUnavailableDates(req.params.listingId, req.params.yearMonth)
+    .then((rows) => {
+      const days = rows.map(row => row.day);
+      const responseObj = {
+        days: days,
+        listingId: req.params.listingId,
+      };
+      console.log(responseObj);
+      res.send(responseObj);
+    })
+    .catch((err) => {
+      res.statusCode(500).send(err);
+    });
 });
 
 module.exports = app;
