@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const db = require('../database');
 
 const app = express();
 
@@ -12,7 +13,13 @@ app.get('/listings/:listingId', (req, res) => {
 });
 
 app.get('/api/listings/:listingId', (req, res) => {
-  res.send(req.params);
+  db.getAllUnavailableDates(req.params.listingId)
+    .then((rows) => {
+      console.log(rows);
+    })
+    .catch((err) => {
+      res.statusCode(500).send(err);
+    });
 });
 
 app.get('/api/listings/:listingId/calendar/:yearMonth', (req, res) => {
