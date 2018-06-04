@@ -4,14 +4,18 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use('/listings/:userId', express.static(path.join(__dirname, '../client/dist')))
+app.use('/', express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json());
 
-app.get('/api/listings/:userId', (req, res) => {
+app.get('/listings/:listingId', (req, res) => {
+  res.redirect('/');
+});
+
+app.get('/api/listings/:listingId', (req, res) => {
   res.send(req.params);
 });
 
-app.get('/api/listings/:userId/calendar/:yearMonth', (req, res) => {
+app.get('/api/listings/:listingId/calendar/:yearMonth', (req, res) => {
   res.send(req.params);
 });
 

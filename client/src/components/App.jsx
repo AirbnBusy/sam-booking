@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -18,7 +17,10 @@ class App extends React.Component {
   getListing() {
     axios.get(`http://localhost:3001/api/listings/${this.state.listingId}`)
       .then((res) => {
-        console.log(res);
+        const { data } = res;
+        this.setState({
+          listingId: data.listingId,
+        });
       })
       .catch((err) => {
         console.log(err);
