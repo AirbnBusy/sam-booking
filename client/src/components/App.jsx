@@ -16,9 +16,11 @@ class App extends React.Component {
       baseRate: null,
       cleaningFee: null,
       maxGuests: null,
+      firstDayPosition: null,
       currentCalendarDatesUnavailable: [],
-      currentMonth: null,
+      currentMonthName: null,
       currentYear: null,
+      numberOfDaysInMonth: null,
     };
   }
 
@@ -47,10 +49,11 @@ class App extends React.Component {
     axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/calendar/${this.state.yearMonth}`)
       .then((res) => {
         const { data } = res;
-        console.log('DATA: ', data);
         this.setState({
           currentCalendarDatesUnavailable: data.days,
-          currentMonth: data.month,
+          firstDayPosition: data.firstDayOfMonth - 1,
+          numberOfDaysInMonth: data.numberOfDaysInMonth,
+          currentMonth: data.monthName,
           currentYear: data.year,
         });
       })
@@ -62,8 +65,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Calendar daysUnav={this.state.currentCalendarDatesUnavailable}/>
-        {this.state.listingId}
+        <Calendar 
+          daysUnav={this.state.currentCalendarDatesUnavailable}
+          firstDayPosition={this.state.firstDayPosition} 
+          daysInMonth={this.state.numberOfDaysInMonth}
+          currentMonthName={this.state.currentMonthName}
+          currentYear={this.state.currentYear} 
+        />
       </div>
     );
   }
