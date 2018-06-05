@@ -15,14 +15,14 @@ class App extends React.Component {
     this.state = {
       listingId: 1001,
       yearMonth: year + month,
-      baseRate: null,
-      cleaningFee: null,
-      maxGuests: null,
-      firstDayPosition: null,
+      baseRate: 0,
+      cleaningFee: 0,
+      maxGuests: 0,
+      firstDayPosition: 0,
       currentCalendarDatesUnavailable: [],
       currentMonthName: null,
-      currentYear: null,
-      numberOfDaysInMonth: null,
+      currentYear: 0,
+      numberOfDaysInMonth: 0,
     };
   }
 
@@ -66,7 +66,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <Calendar
           daysUnav={this.state.currentCalendarDatesUnavailable}
           firstDayPosition={this.state.firstDayPosition}

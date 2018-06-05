@@ -19,7 +19,7 @@ const Calendar = (props) => {
   };
 
   return (
-    <div style={style}>
+    <div style={style} className="calendar">
       {props.currentYearMonth}
       {firstBlankDates}
       {monthDates}

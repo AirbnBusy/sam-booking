@@ -7,7 +7,7 @@ const Date = (props) => {
     (<div style={{ color: 'red' }}> {props.index} </div>);
 
   return (
-    <div>
+    <div className="date">
       { styledDate }
     </div>
   );
