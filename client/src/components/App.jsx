@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Calendar from './Calendar.jsx';
+import Calendar from './Calendar';
 
 class App extends React.Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class App extends React.Component {
         const { data } = res;
         this.setState({
           currentCalendarDatesUnavailable: data.days,
-          firstDayPosition: data.firstDayOfMonth - 1,
+          firstDayPosition: data.firstDayOfMonth,
           numberOfDaysInMonth: data.numberOfDaysInMonth,
           currentMonthName: data.monthName,
           currentYear: data.year,

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Date from './Date.jsx';
+import Date from './Date';
 
 const Calendar = (props) => {
   const firstBlankDates = Array.from(Array(props.firstDayPosition).keys())
     .map(day => <Date key={day} index={0} status="blank" />);
 
-  const monthDates = Array.from(Array(props.daysInMonth).keys())
+  const monthDates = Array.from(new Array(props.daysInMonth), (val, index) => index + 1)
     .map((day) => {
       if (props.daysUnav.indexOf(day) === -1) {
         return <Date key={day} index={day} status="available" />;

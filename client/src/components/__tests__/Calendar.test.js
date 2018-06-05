@@ -1,10 +1,9 @@
 import React from 'react';
-import { Enzyme, shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import Calendar from '../Calendar';
 
-const EnzymeAdapter = require('enzyme-adapter-react-16');
-
-Enzyme.configure({ adapter: new EnzymeAdapter() });
+configure({ adapter: new Adapter() });
 
 describe('Calendar Component', () => {
   it('should render without throwing an error', () => {
