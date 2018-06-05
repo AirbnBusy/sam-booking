@@ -8,8 +8,10 @@ class App extends React.Component {
 
     const date = new Date();
     const year = date.getUTCFullYear().toString();
-    const month = date.getUTCMonth() < 10 ? date.getUTCMonth().toString() : date.getUTCMonth().toString();
-  
+    const month = date.getUTCMonth() < 10 ?
+      date.getUTCMonth().toString() :
+      date.getUTCMonth().toString();
+
     this.state = {
       listingId: 1001,
       yearMonth: year + month,
@@ -53,7 +55,7 @@ class App extends React.Component {
           currentCalendarDatesUnavailable: data.days,
           firstDayPosition: data.firstDayOfMonth - 1,
           numberOfDaysInMonth: data.numberOfDaysInMonth,
-          currentMonth: data.monthName,
+          currentMonthName: data.monthName,
           currentYear: data.year,
         });
       })
@@ -65,17 +67,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Calendar 
+        <Calendar
           daysUnav={this.state.currentCalendarDatesUnavailable}
-          firstDayPosition={this.state.firstDayPosition} 
+          firstDayPosition={this.state.firstDayPosition}
           daysInMonth={this.state.numberOfDaysInMonth}
-          currentMonthName={this.state.currentMonthName}
-          currentYear={this.state.currentYear} 
+          currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
         />
       </div>
     );
   }
 }
-
 
 export default App;
