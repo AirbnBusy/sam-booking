@@ -34,6 +34,12 @@ class App extends React.Component {
     this.getCalendar();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.currentMonth !== this.state.currentMonth) {
+      this.getCalendar();
+    }
+  }
+
   getListing() {
     axios.get(`http://localhost:3001/api/listings/${this.state.listingId}`)
       .then((res) => {
@@ -51,6 +57,7 @@ class App extends React.Component {
   }
 
   getCalendar() {
+    console.log('getCalendar Called');
     const yearString = this.state.currentYear.toString();
     const monthString = this.state.currentMonth < 10 ?
       `0${this.state.currentMonth.toString()}` :

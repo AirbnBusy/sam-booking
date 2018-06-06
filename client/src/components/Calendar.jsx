@@ -15,6 +15,7 @@ const Calendar = (props) => {
     });
 
   const wrapperStyle = {
+    backgroundColor: 'lightblue',
     width: '20%',
     textAlign: 'center',
   };
