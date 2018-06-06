@@ -7,23 +7,26 @@ class App extends React.Component {
     super(props);
 
     const date = new Date();
-    const year = date.getUTCFullYear().toString();
-    const month = date.getUTCMonth() < 10 ?
-      date.getUTCMonth().toString() :
-      date.getUTCMonth().toString();
+    const initYear = date.getUTCFullYear();
+    const initMonth = date.getUTCMonth();
 
     this.state = {
       listingId: 1001,
-      yearMonth: year + month,
       baseRate: 0,
       cleaningFee: 0,
       maxGuests: 0,
-      firstDayPosition: 0,
-      currentCalendarDatesUnavailable: [],
+
+      currentYear: initYear,
+      currentMonth: initMonth,
+
       currentMonthName: null,
-      currentYear: 0,
+      firstDayPosition: 0,
       numberOfDaysInMonth: 0,
+      currentCalendarDatesUnavailable: [],
     };
+
+    this.incrementCalendar = this.incrementCalendar.bind(this);
+    this.decrementCalendar = this.decrementCalendar.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +51,13 @@ class App extends React.Component {
   }
 
   getCalendar() {
-    axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/calendar/${this.state.yearMonth}`)
+    const yearString = this.state.currentYear.toString();
+    const monthString = this.state.currentMonth < 10 ?
+      `0${this.state.currentMonth.toString()}` :
+      `${this.state.currentMonth.toString()}`;
+    const yearMonthString = `${yearString}${monthString}`;
+
+    axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/calendar/${yearMonthString}`)
       .then((res) => {
         const { data } = res;
         this.setState({
@@ -64,6 +73,28 @@ class App extends React.Component {
       });
   }
 
+  incrementCalendar() {
+    if (this.state.currentMonth < 11) {
+      this.setState(prevState => ({ currentMonth: prevState.currentMonth + 1 }));
+    } else {
+      this.setState(prevState => ({
+        currentMonth: 0,
+        currentYear: prevState.currentYear + 1,
+      }));
+    }
+  }
+
+  decrementCalendar() {
+    if (this.state.currentMonth > 0) {
+      this.setState(prevState => ({ currentMonth: prevState.currentMonth - 1 }));
+    } else {
+      this.setState(prevState => ({
+        currentMonth: 11,
+        currentYear: prevState.currentYear - 1,
+      }));
+    }
+  }
+
   render() {
     return (
       <div className="app">
@@ -72,6 +103,8 @@ class App extends React.Component {
           firstDayPosition={this.state.firstDayPosition}
           daysInMonth={this.state.numberOfDaysInMonth}
           currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
+          incrementCalendar={this.incrementCalendar}
+          decrementCalendar={this.decrementCalendar}
         />
       </div>
     );
