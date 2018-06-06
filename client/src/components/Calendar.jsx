@@ -27,9 +27,9 @@ const Calendar = (props) => {
 
   return (
     <div style={wrapperStyle}>
-      <button onClick={() => props.decrementCalendar()}>&lt;</button>
+      <button id="back" onClick={() => props.decrementCalendar()}>&lt;</button>
       {props.currentYearMonth}
-      <button onClick={() => props.incrementCalendar()}>&gt;</button>
+      <button id="forward" onClick={() => props.incrementCalendar()}>&gt;</button>
       <div style={gridStyle}>
         <div>Su</div>
         <div>Mo</div>

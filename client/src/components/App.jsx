@@ -57,7 +57,6 @@ class App extends React.Component {
   }
 
   getCalendar() {
-    console.log('getCalendar Called');
     const yearString = this.state.currentYear.toString();
     const monthString = this.state.currentMonth < 10 ?
       `0${this.state.currentMonth.toString()}` :
