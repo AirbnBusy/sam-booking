@@ -23,6 +23,11 @@ class App extends React.Component {
       firstDayPosition: 0,
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
+
+      currentGuestSum: 1,
+      currentAdultSum: 1,
+      currentChildSum: 0,
+      currentInfantSum: 0,
     };
 
     this.incrementCalendar = this.incrementCalendar.bind(this);
@@ -102,19 +107,89 @@ class App extends React.Component {
   }
 
   render() {
+    const deleteStyleLater = {
+      display: 'flex',
+      justifyContent: 'center',
+    };
+
+    const containerStyle = {
+      border: '1px solid black',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      width: '25%',
+      padding: '.5em',
+    };
+
+    const infoStyle = {
+      textAlign: 'left',
+      width: '80%',
+      paddingTop: '.75em',
+      paddingBottom: '1em',
+      marginBottom: '.5em',
+    };
+
+    const priceStyle = {
+      borderBottom: '1px solid grey',
+    };
+
+    const inCalendar = this.state.inCalendarOpen ? (<Calendar
+      daysUnav={this.state.currentCalendarDatesUnavailable}
+      firstDayPosition={this.state.firstDayPosition}
+      daysInMonth={this.state.numberOfDaysInMonth}
+      currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
+      incrementCalendar={this.incrementCalendar}
+      decrementCalendar={this.decrementCalendar}
+    />) : null;
+
+    const outCalendar = this.state.outCalendarOpen ? (<Calendar
+      daysUnav={this.state.currentCalendarDatesUnavailable}
+      firstDayPosition={this.state.firstDayPosition}
+      daysInMonth={this.state.numberOfDaysInMonth}
+      currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
+      incrementCalendar={this.incrementCalendar}
+      decrementCalendar={this.decrementCalendar}
+    />) : null;
+
+    const guestSum = this.state.currentGuestSum > 1 ?
+      `${this.state.currentGuestSum} Guests` :
+      `${this.state.currentGuestSum} Guest`;
+
     return (
-      <div className="app">
-        <Calendar
-          daysUnav={this.state.currentCalendarDatesUnavailable}
-          firstDayPosition={this.state.firstDayPosition}
-          daysInMonth={this.state.numberOfDaysInMonth}
-          currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
-          incrementCalendar={this.incrementCalendar}
-          decrementCalendar={this.decrementCalendar}
-        />
+      <div style={deleteStyleLater}>
+        <form style={containerStyle} className="app">
+          <div style={Object.assign(priceStyle, infoStyle)}>
+            ${this.state.baseRate} per night
+          </div>
+          <div style={infoStyle}>
+            <label>
+              Dates
+            </label>
+            <div>
+              <input placeholder="Check In" />
+              -&gt;
+              <input placeholder="Check Out" />
+              {inCalendar}
+              {outCalendar}
+            </div>
+          </div>
+          <div style={infoStyle}>
+            <label>
+              Guests
+            </label>
+            <div>
+              <input value={guestSum} />
+            </div>
+          </div>
+          <div>
+            <button>Request to Book</button>
+          </div>
+        </form>
       </div>
     );
   }
 }
 
 export default App;
+
+

@@ -16,8 +16,9 @@ const Calendar = (props) => {
 
   const wrapperStyle = {
     backgroundColor: 'lightblue',
-    width: '20%',
+    width: '55%',
     textAlign: 'center',
+    zIndex: '1',
   };
 
   const gridStyle = {
