@@ -2,13 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Date from './Date';
 
-const Calendar = (props) => {
-  const firstBlankDates = Array.from(Array(props.firstDayPosition).keys())
+const Calendar = ({
+  firstDayPosition,
+  daysUnav,
+  daysInMonth,
+  currentYearMonth,
+  incrementCalendar,
+  decrementCalendar,
+}) => {
+  const firstBlankDates = Array.from(Array(firstDayPosition).keys())
     .map(day => <Date key={day} index={0} status="blank" />);
 
-  const monthDates = Array.from(new Array(props.daysInMonth), (val, index) => index + 1)
+  const monthDates = Array.from(new Array(daysInMonth), (val, index) => index + 1)
     .map((day) => {
-      if (props.daysUnav.indexOf(day) === -1) {
+      if (daysUnav.indexOf(day) === -1) {
         return <Date key={day} index={day} status="available" />;
       }
       return <Date key={day} index={day} status="unavailable" />;
@@ -28,9 +35,9 @@ const Calendar = (props) => {
 
   return (
     <div style={wrapperStyle}>
-      <button id="back" type="button" onClick={() => props.decrementCalendar()}>&lt;</button>
-      {props.currentYearMonth}
-      <button id="forward" type="button" onClick={() => props.incrementCalendar()}>&gt;</button>
+      <button id="back" type="button" onClick={() => decrementCalendar()}>&lt;</button>
+      {currentYearMonth}
+      <button id="forward" type="button" onClick={() => incrementCalendar()}>&gt;</button>
       <div style={gridStyle}>
         <div>Su</div>
         <div>Mo</div>
