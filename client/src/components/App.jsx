@@ -20,12 +20,12 @@ class App extends React.Component {
       currentYear: initYear,
       currentMonth: initMonth,
 
-      currentMonthName: null,
+      currentMonthName: '',
       firstDayPosition: 0,
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
 
-      currentGuestSum: 1,
+      currentGuestSum: 0,
       currentAdultSum: 1,
       currentChildSum: 0,
       currentInfantSum: 0,
@@ -33,16 +33,23 @@ class App extends React.Component {
 
     this.incrementCalendar = this.incrementCalendar.bind(this);
     this.decrementCalendar = this.decrementCalendar.bind(this);
+    this.incrementGuests = this.incrementGuests.bind(this);
+    this.decrementGuests = this.decrementGuests.bind(this);
   }
 
   componentDidMount() {
     this.getListing();
     this.getCalendar();
+    this.sumGuests();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentMonth !== this.state.currentMonth) {
       this.getCalendar();
+    } else if (prevState.currentAdultSum !== this.state.currentAdultSum ||
+              prevState.currentChildSum !== this.state.currentChildSum ||
+              prevState.currentInfantSum !== this.state.currentInfantSum) {
+      this.sumGuests();
     }
   }
 
@@ -107,6 +114,44 @@ class App extends React.Component {
     }
   }
 
+  incrementGuests(guestType) {
+    if (guestType === 'adult') {
+      this.setState(prevState => ({
+        currentAdultSum: prevState.currentAdultSum + 1,
+      }));
+    } else if (guestType === 'child') {
+      this.setState(prevState => ({
+        currentChildSum: prevState.currentChildSum + 1,
+      }));
+    } else {
+      this.setState(prevState => ({
+        currentInfantSum: prevState.currentInfantSum + 1,
+      }));
+    }
+  }
+
+  decrementGuests(guestType) {
+    if (guestType === 'adult') {
+      this.setState(prevState => ({
+        currentAdultSum: prevState.currentAdultSum - 1,
+      }));
+    } else if (guestType === 'child') {
+      this.setState(prevState => ({
+        currentChildSum: prevState.currentChildSum - 1,
+      }));
+    } else {
+      this.setState(prevState => ({
+        currentInfantSum: prevState.currentInfantSum - 1,
+      }));
+    }
+  }
+
+  sumGuests() {
+    this.setState({
+      currentGuestSum: this.state.currentAdultSum + this.state.currentChildSum + this.state.currentInfantSum,
+    });
+  }
+
   render() {
     const deleteStyleLater = {
       display: 'flex',
@@ -142,7 +187,7 @@ class App extends React.Component {
       currentYear: this.state.currentYear,
       incrementCalendar: this.incrementCalendar,
       decrementCalendar: this.decrementCalendar,
-    }
+    };
 
     return (
       <div style={deleteStyleLater}>
@@ -151,7 +196,14 @@ class App extends React.Component {
             ${this.state.baseRate} per night
           </div>
           <CheckIO calendar={calendar} />
-          <Guests currentGuestSum={this.state.currentGuestSum} />
+          <Guests
+            currentGuestSum={this.state.currentGuestSum}
+            currentAdultSum={this.state.currentAdultSum}
+            currentChildSum={this.state.currentChildSum}
+            currentInfantSum={this.state.currentInfantSum}
+            incrementGuests={this.incrementGuests}
+            decrementGuests={this.decrementGuests}
+          />
           <div>
             <button>Request to Book</button>
           </div>

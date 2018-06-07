@@ -72,10 +72,11 @@ class CheckIO extends React.Component {
 
 CheckIO.propTypes = {
   calendar: PropTypes.shape({
-    daysUnav: PropTypes.arrayOf(PropTypes.number).isRequired,
+    currentCalendarDatesUnavailable: PropTypes.arrayOf(PropTypes.number).isRequired,
     firstDayPosition: PropTypes.number.isRequired,
-    daysInMonth: PropTypes.number.isRequired,
-    currentYearMonth: PropTypes.string.isRequired,
+    numberOfDaysInMonth: PropTypes.number.isRequired,
+    currentYear: PropTypes.number.isRequired,
+    currentMonthName: PropTypes.string.isRequired,
     incrementCalendar: PropTypes.func.isRequired,
     decrementCalendar: PropTypes.func.isRequired,
   }),
