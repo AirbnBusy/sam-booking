@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Calendar from './Calendar';
+import CheckIO from './CheckIO';
+import Guests from './Guests';
 
 class App extends React.Component {
   constructor(props) {
@@ -133,27 +134,15 @@ class App extends React.Component {
       borderBottom: '1px solid grey',
     };
 
-    const inCalendar = this.state.inCalendarOpen ? (<Calendar
-      daysUnav={this.state.currentCalendarDatesUnavailable}
-      firstDayPosition={this.state.firstDayPosition}
-      daysInMonth={this.state.numberOfDaysInMonth}
-      currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
-      incrementCalendar={this.incrementCalendar}
-      decrementCalendar={this.decrementCalendar}
-    />) : null;
-
-    const outCalendar = this.state.outCalendarOpen ? (<Calendar
-      daysUnav={this.state.currentCalendarDatesUnavailable}
-      firstDayPosition={this.state.firstDayPosition}
-      daysInMonth={this.state.numberOfDaysInMonth}
-      currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
-      incrementCalendar={this.incrementCalendar}
-      decrementCalendar={this.decrementCalendar}
-    />) : null;
-
-    const guestSum = this.state.currentGuestSum > 1 ?
-      `${this.state.currentGuestSum} Guests` :
-      `${this.state.currentGuestSum} Guest`;
+    const calendar = {
+      currentCalendarDatesUnavailable: this.state.currentCalendarDatesUnavailable,
+      firstDayPosition: this.state.firstDayPosition,
+      numberOfDaysInMonth: this.state.numberOfDaysInMonth,
+      currentMonthName: this.state.currentMonthName,
+      currentYear: this.state.currentYear,
+      incrementCalendar: this.incrementCalendar,
+      decrementCalendar: this.decrementCalendar,
+    }
 
     return (
       <div style={deleteStyleLater}>
@@ -161,26 +150,8 @@ class App extends React.Component {
           <div style={Object.assign(priceStyle, infoStyle)}>
             ${this.state.baseRate} per night
           </div>
-          <div style={infoStyle}>
-            <label>
-              Dates
-            </label>
-            <div>
-              <input placeholder="Check In" />
-              -&gt;
-              <input placeholder="Check Out" />
-              {inCalendar}
-              {outCalendar}
-            </div>
-          </div>
-          <div style={infoStyle}>
-            <label>
-              Guests
-            </label>
-            <div>
-              <input value={guestSum} />
-            </div>
-          </div>
+          <CheckIO calendar={calendar} />
+          <Guests currentGuestSum={this.state.currentGuestSum} />
           <div>
             <button>Request to Book</button>
           </div>
@@ -191,5 +162,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
