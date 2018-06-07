@@ -16,6 +16,22 @@ class Guests extends React.Component {
   }
 
   render() {
+    const {
+      guests: {
+        currentGuestSum,
+        currentAdultSum,
+        currentChildSum,
+        currentInfantSum,
+        incrementGuests,
+        decrementGuests,
+        maxGuests,
+        adultDecButtonActive,
+        childDecButtonActive,
+        infantDecButtonActive,
+        allIncButtonsActive,
+      },
+    } = this.props;
+
     const infoStyle = {
       position: 'relative',
       textAlign: 'left',
@@ -32,9 +48,9 @@ class Guests extends React.Component {
       width: '100%',
     };
 
-    const guestSum = this.props.guests.currentGuestSum > 1 ?
-      `${this.props.guests.currentGuestSum} Guests` :
-      `${this.props.guests.currentGuestSum} Guest`;
+    const guestSum = currentGuestSum > 1 ?
+      `${currentGuestSum} Guests` :
+      `${currentGuestSum} Guest`;
 
     const guestSelector = this.state.guestSelectorOpen ? (
       <div style={selectorStyle}>
@@ -42,16 +58,16 @@ class Guests extends React.Component {
           Adults
           <button
             type="button"
-            onClick={() => this.props.guests.decrementGuests('adult')}
-            disabled={!this.props.guests.adultDecButtonActive}
+            onClick={() => decrementGuests('adult')}
+            disabled={!adultDecButtonActive}
           >
           -
           </button>
-          {this.props.guests.currentAdultSum}
+          {currentAdultSum}
           <button 
             type="button"
-            onClick={() => this.props.guests.incrementGuests('adult')}
-            disabled={!this.props.guests.allIncButtonsActive}
+            onClick={() => incrementGuests('adult')}
+            disabled={!allIncButtonsActive}
           >
           +
           </button>
@@ -60,16 +76,16 @@ class Guests extends React.Component {
           Children
           <button
             type="button"
-            onClick={() => this.props.guests.decrementGuests('child')}
-            disabled={!this.props.guests.childDecButtonActive}
+            onClick={() => decrementGuests('child')}
+            disabled={!childDecButtonActive}
           >
           -
           </button>
-          {this.props.guests.currentChildSum}
+          {currentChildSum}
           <button 
             type="button"
-            onClick={() => this.props.guests.incrementGuests('child')}
-            disabled={!this.props.guests.allIncButtonsActive}
+            onClick={() => incrementGuests('child')}
+            disabled={!allIncButtonsActive}
           >
           +
           </button>
@@ -78,15 +94,15 @@ class Guests extends React.Component {
           Infants
           <button
             type="button"
-            onClick={() => this.props.guests.decrementGuests('infant')}
-            disabled={!this.props.guests.infantDecButtonActive}
+            onClick={() => decrementGuests('infant')}
+            disabled={!infantDecButtonActive}
           >
           -
           </button>
-          {this.props.guests.currentInfantSum}
-          <button type="button" onClick={() => this.props.guests.incrementGuests('infant')}>+</button>
+          {currentInfantSum}
+          <button type="button" onClick={() => incrementGuests('infant')}>+</button>
         </div>
-        {this.props.guests.maxGuests} guests maximum. Infants don’t count toward the number of guests.
+        {maxGuests} guests maximum. Infants don’t count toward the number of guests.
       </div>) :
       null;
 

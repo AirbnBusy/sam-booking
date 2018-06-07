@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Date = (props) => {
+const Date = ({ index, status }) => {
   const availStyle = {
     color: 'black',
   };
@@ -15,13 +15,13 @@ const Date = (props) => {
     backgroundColor: 'grey',
   };
 
-  const availDate = props.status === 'available' ?
-    (<div style={availStyle}> {props.index} </div>) : null;
+  const availDate = status === 'available' ?
+    (<div style={availStyle}> {index} </div>) : null;
 
-  const unavailDate = props.status === 'unavailable' ?
-    (<div style={unavailStyle}> {props.index} </div>) : null;
+  const unavailDate = status === 'unavailable' ?
+    (<div style={unavailStyle}> {index} </div>) : null;
 
-  const blankDate = props.status === 'blank' ?
+  const blankDate = status === 'blank' ?
     (<div style={blankStyle} />) : null;
 
   return (
