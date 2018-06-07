@@ -54,10 +54,11 @@ class Guests extends React.Component {
 
     const guestSelector = this.state.guestSelectorOpen ? (
       <div style={selectorStyle}>
-        <div>
+        <div className="guestIncDec">
           Adults
           <button
             type="button"
+            id="adultDec"
             onClick={() => decrementGuests('adult')}
             disabled={!adultDecButtonActive}
           >
@@ -66,16 +67,18 @@ class Guests extends React.Component {
           {currentAdultSum}
           <button 
             type="button"
+            id="adultInc"
             onClick={() => incrementGuests('adult')}
             disabled={!allIncButtonsActive}
           >
           +
           </button>
         </div>
-        <div>
+        <div className="guestIncDec">
           Children
           <button
             type="button"
+            id="childDec"
             onClick={() => decrementGuests('child')}
             disabled={!childDecButtonActive}
           >
@@ -84,35 +87,37 @@ class Guests extends React.Component {
           {currentChildSum}
           <button 
             type="button"
+            id="childInc"
             onClick={() => incrementGuests('child')}
             disabled={!allIncButtonsActive}
           >
           +
           </button>
         </div>
-        <div>
+        <div className="guestIncDec">
           Infants
           <button
             type="button"
+            id="infantInc"
             onClick={() => decrementGuests('infant')}
             disabled={!infantDecButtonActive}
           >
           -
           </button>
           {currentInfantSum}
-          <button type="button" onClick={() => incrementGuests('infant')}>+</button>
+          <button type="button" id="infantInc" onClick={() => incrementGuests('infant')}>+</button>
         </div>
         {maxGuests} guests maximum. Infants don’t count toward the number of guests.
       </div>) :
       null;
 
     return (
-      <div style={infoStyle}>
+      <div style={infoStyle} className="guests">
         <label>
           Guests
         </label>
         <div>
-          <input readOnly value={guestSum} onClick={() => this.handleClick()} />
+          <input readOnly id="guestInput" value={guestSum} onClick={() => this.handleClick()} />
         </div>
         {guestSelector}
       </div>
