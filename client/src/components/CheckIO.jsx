@@ -79,7 +79,7 @@ CheckIO.propTypes = {
     currentMonthName: PropTypes.string.isRequired,
     incrementCalendar: PropTypes.func.isRequired,
     decrementCalendar: PropTypes.func.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default CheckIO;
