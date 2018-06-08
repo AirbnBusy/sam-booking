@@ -25,16 +25,9 @@ class App extends React.Component {
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
 
-      selectedCheckInDate: {
-        day: 0,
-        month: 0,
-        year: 0,
-      },
-      selectedCheckOutDate: {
-        day: 0,
-        month: 0,
-        year: 0,
-      },
+      selectedCheckInDate: '',
+      selectedCheckOutDate: '',
+      numberOfDaysSelected: 0,
 
       currentGuestSum: 0,
       allIncButtonsActive: true,
@@ -67,6 +60,9 @@ class App extends React.Component {
               prevState.currentChildSum !== this.state.currentChildSum ||
               prevState.currentInfantSum !== this.state.currentInfantSum) {
       this.sumGuests();
+    } else if (prevState.selectedCheckInDate !== this.state.selectedCheckInDate ||
+              prevState.selectedCheckOutDate !== this.state.selectedCheckOutDate) {
+      this.sumDates();
     }
   }
 
@@ -132,12 +128,31 @@ class App extends React.Component {
     }
   }
 
-  selectCheckInDate(dateObj) {
-    console.log('CHECK IN:', dateObj);
+  selectCheckInDate(selectedDate) {
+    const inDate = new Date(selectedDate);
+    const dateStr = inDate.toLocaleDateString();
+    this.setState({
+      selectedCheckInDate: dateStr,
+    });
   }
 
-  selectCheckOutDate(dateObj) {
-    console.log('CHECK OUT:', dateObj);
+  selectCheckOutDate(selectedDate) {
+    const outDate = new Date(selectedDate);
+    const dateStr = outDate.toLocaleDateString();
+    this.setState({
+      selectedCheckOutDate: dateStr,
+    });
+  }
+
+  sumDates() {
+    const inDate = new Date(this.state.selectedCheckInDate);
+    const outDate = new Date(this.state.selectedCheckOutDate);
+    if (inDate && outDate) {
+      const numberOfDaysSelected = Math.abs(outDate - inDate) / 86400000;
+      this.setState({
+        numberOfDaysSelected,
+      });
+    }
   }
 
   incrementGuests(guestType) {

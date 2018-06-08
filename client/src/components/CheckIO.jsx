@@ -10,14 +10,24 @@ class CheckIO extends React.Component {
       inCalendarOpen: false,
       outCalendarOpen: false,
     };
+
+    this.inToggleCalendar = this.toggleCalendar.bind(this, 'in');
+    this.outToggleCalendar = this.toggleCalendar.bind(this, 'out');
   }
 
-  handleClick(calendarType) {
+  toggleCalendar(calendarType) {
     if (calendarType === 'in') {
-      this.setState(prevState => ({
-        inCalendarOpen: !prevState.inCalendarOpen,
-        outCalendarOpen: false,
-      }));
+      if (this.state.inCalendarOpen && !this.props.calendar.selectedCheckOutDate) {
+        this.setState(prevState => ({
+          inCalendarOpen: !prevState.inCalendarOpen,
+          outCalendarOpen: true,
+        }));
+      } else {
+        this.setState(prevState => ({
+          inCalendarOpen: !prevState.inCalendarOpen,
+          outCalendarOpen: false,
+        }));
+      }
     } else if (calendarType === 'out') {
       this.setState(prevState => ({
         inCalendarOpen: false,
@@ -52,6 +62,12 @@ class CheckIO extends React.Component {
       marginBottom: '.5em',
     };
 
+    const inOutStyle = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      position: 'relative',
+    };
+
     const inCalendar = this.state.inCalendarOpen ? (<Calendar
       id="inCal"
       daysUnav={currentCalendarDatesUnavailable}
@@ -65,6 +81,7 @@ class CheckIO extends React.Component {
       selectedCheckInDate={selectedCheckInDate}
       selectedCheckOutDate={selectedCheckOutDate}
       selectDate={selectCheckInDate}
+      toggleCalendar={this.inToggleCalendar}
     />) : null;
 
     const outCalendar = this.state.outCalendarOpen ? (<Calendar
@@ -80,19 +97,35 @@ class CheckIO extends React.Component {
       selectedCheckInDate={selectedCheckInDate}
       selectedCheckOutDate={selectedCheckOutDate}
       selectDate={selectCheckOutDate}
+      toggleCalendar={this.outToggleCalendar}
     />) : null;
+
+    const inDate = selectedCheckInDate || '';
+    const outDate = selectedCheckOutDate || '';
 
     return (
       <div style={infoStyle}>
-        <label>
-          Dates
-        </label>
-        <div>
-          <input id="checkIn" placeholder="Check In" onClick={() => this.handleClick('in')} />
+        Dates
+        <div style={inOutStyle}>
+          <div>
+            <input
+              id="checkIn"
+              placeholder="Check In"
+              value={inDate}
+              onClick={() => this.toggleCalendar('in')}
+            />
+            {inCalendar}
+          </div>
           -&gt;
-          <input id="checkOut" placeholder="Check Out" onClick={() => this.handleClick('out')} />
-          {inCalendar}
-          {outCalendar}
+          <div>
+            <input
+              id="checkOut"
+              placeholder="Check Out"
+              value={outDate}
+              onClick={() => this.toggleCalendar('out')}
+            />
+            {outCalendar}
+          </div>
         </div>
       </div>
     );
@@ -109,8 +142,8 @@ CheckIO.propTypes = {
     currentMonthName: PropTypes.string.isRequired,
     incrementCalendar: PropTypes.func.isRequired,
     decrementCalendar: PropTypes.func.isRequired,
-    selectedCheckInDate: PropTypes.objectOf(PropTypes.number).isRequired,
-    selectedCheckOutDate: PropTypes.objectOf(PropTypes.number).isRequired,
+    selectedCheckInDate: PropTypes.string.isRequired,
+    selectedCheckOutDate: PropTypes.string.isRequired,
     selectCheckInDate: PropTypes.func.isRequired,
     selectCheckOutDate: PropTypes.func.isRequired,
   }).isRequired,

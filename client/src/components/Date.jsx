@@ -23,6 +23,7 @@ class Date extends React.Component {
       month,
       year,
       selectDate,
+      toggleCalendar,
     } = this.props;
 
     const availStyle = {
@@ -46,11 +47,10 @@ class Date extends React.Component {
         style={availStyle}
         onMouseEnter={() => this.toggleHover()}
         onMouseLeave={() => this.toggleHover()}
-        onClick={() => selectDate({
-          day,
-          month,
-          year,
-        })}
+        onClick={() => {
+          selectDate(`${month}/${day}/${year}`);
+          toggleCalendar();
+        }}
       >
         {day}
       </div>) : null;
@@ -77,6 +77,7 @@ Date.propTypes = {
   month: PropTypes.number,
   year: PropTypes.number,
   selectDate: PropTypes.func,
+  toggleCalendar: PropTypes.func,
 };
 
 export default Date;

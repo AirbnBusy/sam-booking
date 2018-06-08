@@ -14,6 +14,7 @@ const Calendar = ({
   selectedCheckInDate,
   selectedCheckOutDate,
   selectDate,
+  toggleCalendar,
 }) => {
   const firstBlankDates = Array.from(Array(firstDayPosition).keys())
     .map(day => <Date key={day} day={0} status="blank" />);
@@ -29,6 +30,7 @@ const Calendar = ({
             selectDate={selectDate}
             year={currentYear}
             month={currentMonth}
+            toggleCalendar={toggleCalendar}
           />
         );
       }
@@ -39,7 +41,8 @@ const Calendar = ({
     backgroundColor: 'lightblue',
     width: '55%',
     textAlign: 'center',
-    zIndex: '1',
+    position: 'absolute',
+    zIndex: 1,
   };
 
   const gridStyle = {
@@ -78,9 +81,10 @@ Calendar.propTypes = {
   currentYearMonth: PropTypes.string.isRequired,
   incrementCalendar: PropTypes.func.isRequired,
   decrementCalendar: PropTypes.func.isRequired,
-  selectedCheckInDate: PropTypes.objectOf(PropTypes.number).isRequired,
-  selectedCheckOutDate: PropTypes.objectOf(PropTypes.number).isRequired,
+  selectedCheckInDate: PropTypes.string.isRequired,
+  selectedCheckOutDate: PropTypes.string.isRequired,
   selectDate: PropTypes.func.isRequired,
+  toggleCalendar: PropTypes.func.isRequired,
 };
 
 export default Calendar;
