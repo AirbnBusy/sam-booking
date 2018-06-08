@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CheckIO from './CheckIO';
 import Guests from './Guests';
+import Summary from './Summary';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,12 +31,13 @@ class App extends React.Component {
       numberOfDaysSelected: 0,
 
       currentGuestSum: 0,
-      allIncButtonsActive: true,
       currentAdultSum: 1,
-      adultDecButtonActive: false,
       currentChildSum: 0,
-      childDecButtonActive: false,
       currentInfantSum: 0,
+
+      allIncButtonsActive: true,
+      adultDecButtonActive: false,
+      childDecButtonActive: false,
       infantDecButtonActive: false,
     };
 
@@ -274,6 +276,13 @@ class App extends React.Component {
       allIncButtonsActive: this.state.allIncButtonsActive,
     };
 
+    const summaryComponent = (
+      this.state.currentGuestSum
+      && this.state.selectedCheckInDate
+      && this.state.selectedCheckOutDate)
+      ? (<Summary />)
+      : null;
+
     return (
       <div style={deleteStyleLater}>
         <form style={containerStyle} className="app">
@@ -282,6 +291,7 @@ class App extends React.Component {
           </div>
           <CheckIO calendar={calendar} />
           <Guests guests={guests} />
+          {summaryComponent}
           <div>
             <button>Request to Book</button>
           </div>
