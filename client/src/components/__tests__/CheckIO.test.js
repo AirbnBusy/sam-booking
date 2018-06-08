@@ -2,12 +2,10 @@ import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
-import chai from 'chai';
+import { expect } from 'chai';
 import CheckIO from '../CheckIO';
 
 configure({ adapter: new Adapter() });
-
-const { expect } = chai;
 
 describe('CheckIO Component Tests', () => {
   const calendar = {
@@ -15,9 +13,14 @@ describe('CheckIO Component Tests', () => {
     firstDayPosition: 5,
     numberOfDaysInMonth: 30,
     currentMonthName: 'June',
+    currentMonth: 6,
     currentYear: 2018,
     incrementCalendar: sinon.spy(),
     decrementCalendar: sinon.spy(),
+    selectedCheckInDate: '',
+    selectedCheckOutDate: '',
+    selectCheckInDate: () => 'nothing',
+    selectCheckOutDate: () => 'nothing',
   };
 
   it('should render a calendar when checkIn input is clicked', () => {

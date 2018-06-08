@@ -44,6 +44,7 @@ class Date extends React.Component {
 
     const availDate = status === 'available' ? (
       <div
+        id={`date_${day}`}
         style={availStyle}
         onMouseEnter={() => this.toggleHover()}
         onMouseLeave={() => this.toggleHover()}
