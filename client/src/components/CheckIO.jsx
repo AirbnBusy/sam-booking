@@ -34,8 +34,13 @@ class CheckIO extends React.Component {
         numberOfDaysInMonth,
         currentMonthName,
         currentYear,
+        currentMonth,
         incrementCalendar,
         decrementCalendar,
+        selectedCheckInDate,
+        selectedCheckOutDate,
+        selectCheckInDate,
+        selectCheckOutDate,
       },
     } = this.props;
 
@@ -52,9 +57,14 @@ class CheckIO extends React.Component {
       daysUnav={currentCalendarDatesUnavailable}
       firstDayPosition={firstDayPosition}
       daysInMonth={numberOfDaysInMonth}
+      currentYear={currentYear}
+      currentMonth={currentMonth}
       currentYearMonth={`${currentMonthName} ${currentYear}`}
       incrementCalendar={incrementCalendar}
       decrementCalendar={decrementCalendar}
+      selectedCheckInDate={selectedCheckInDate}
+      selectedCheckOutDate={selectedCheckOutDate}
+      selectDate={selectCheckInDate}
     />) : null;
 
     const outCalendar = this.state.outCalendarOpen ? (<Calendar
@@ -62,9 +72,14 @@ class CheckIO extends React.Component {
       daysUnav={currentCalendarDatesUnavailable}
       firstDayPosition={firstDayPosition}
       daysInMonth={numberOfDaysInMonth}
+      currentYear={currentYear}
+      currentMonth={currentMonth}
       currentYearMonth={`${currentMonthName} ${currentYear}`}
       incrementCalendar={incrementCalendar}
       decrementCalendar={decrementCalendar}
+      selectedCheckInDate={selectedCheckInDate}
+      selectedCheckOutDate={selectedCheckOutDate}
+      selectDate={selectCheckOutDate}
     />) : null;
 
     return (
@@ -89,10 +104,15 @@ CheckIO.propTypes = {
     currentCalendarDatesUnavailable: PropTypes.arrayOf(PropTypes.number).isRequired,
     firstDayPosition: PropTypes.number.isRequired,
     numberOfDaysInMonth: PropTypes.number.isRequired,
+    currentMonth: PropTypes.number.isRequired,
     currentYear: PropTypes.number.isRequired,
     currentMonthName: PropTypes.string.isRequired,
     incrementCalendar: PropTypes.func.isRequired,
     decrementCalendar: PropTypes.func.isRequired,
+    selectedCheckInDate: PropTypes.objectOf(PropTypes.number).isRequired,
+    selectedCheckOutDate: PropTypes.objectOf(PropTypes.number).isRequired,
+    selectCheckInDate: PropTypes.func.isRequired,
+    selectCheckOutDate: PropTypes.func.isRequired,
   }).isRequired,
 };
 

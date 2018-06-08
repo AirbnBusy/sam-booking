@@ -25,6 +25,17 @@ class App extends React.Component {
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
 
+      selectedCheckInDate: {
+        day: 0,
+        month: 0,
+        year: 0,
+      },
+      selectedCheckOutDate: {
+        day: 0,
+        month: 0,
+        year: 0,
+      },
+
       currentGuestSum: 0,
       allIncButtonsActive: true,
       currentAdultSum: 1,
@@ -37,6 +48,8 @@ class App extends React.Component {
 
     this.incrementCalendar = this.incrementCalendar.bind(this);
     this.decrementCalendar = this.decrementCalendar.bind(this);
+    this.selectCheckInDate = this.selectCheckInDate.bind(this);
+    this.selectCheckOutDate = this.selectCheckOutDate.bind(this);
     this.incrementGuests = this.incrementGuests.bind(this);
     this.decrementGuests = this.decrementGuests.bind(this);
   }
@@ -117,6 +130,14 @@ class App extends React.Component {
         currentYear: prevState.currentYear - 1,
       }));
     }
+  }
+
+  selectCheckInDate(dateObj) {
+    console.log('CHECK IN:', dateObj);
+  }
+
+  selectCheckOutDate(dateObj) {
+    console.log('CHECK OUT:', dateObj);
   }
 
   incrementGuests(guestType) {
@@ -214,9 +235,14 @@ class App extends React.Component {
       firstDayPosition: this.state.firstDayPosition,
       numberOfDaysInMonth: this.state.numberOfDaysInMonth,
       currentMonthName: this.state.currentMonthName,
+      currentMonth: this.state.currentMonth,
       currentYear: this.state.currentYear,
       incrementCalendar: this.incrementCalendar,
       decrementCalendar: this.decrementCalendar,
+      selectedCheckInDate: this.state.selectedCheckInDate,
+      selectedCheckOutDate: this.state.selectedCheckOutDate,
+      selectCheckInDate: this.selectCheckInDate,
+      selectCheckOutDate: this.selectCheckOutDate,
     };
 
     const guests = {
