@@ -83,6 +83,7 @@ class App extends React.Component {
     axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/calendar/${yearMonthString}`)
       .then((res) => {
         const { data } = res;
+        console.log(data);
         this.setState({
           currentCalendarDatesUnavailable: data.days,
           firstDayPosition: data.firstDayOfMonth,

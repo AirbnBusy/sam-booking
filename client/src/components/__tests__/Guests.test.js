@@ -62,7 +62,7 @@ describe('Guests Component', () => {
     expect(guests.decrementGuests).to.have.property('callCount', 1);
   });
 
-  it('incrementer should be called when + button clicked', () => {
+  it('should render 2 Guests as opposed to 2 Guest when given a value greater than 1', () => {
     const wrapper = mount(<Guests guests={guests} />);
     expect(wrapper.find('#guestInput').props()).to.have.property('value', '2 Guests');
   });

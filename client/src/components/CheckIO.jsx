@@ -48,6 +48,7 @@ class CheckIO extends React.Component {
     };
 
     const inCalendar = this.state.inCalendarOpen ? (<Calendar
+      id="inCal"
       daysUnav={currentCalendarDatesUnavailable}
       firstDayPosition={firstDayPosition}
       daysInMonth={numberOfDaysInMonth}
@@ -57,6 +58,7 @@ class CheckIO extends React.Component {
     />) : null;
 
     const outCalendar = this.state.outCalendarOpen ? (<Calendar
+      id="outCal"
       daysUnav={currentCalendarDatesUnavailable}
       firstDayPosition={firstDayPosition}
       daysInMonth={numberOfDaysInMonth}
@@ -71,9 +73,9 @@ class CheckIO extends React.Component {
           Dates
         </label>
         <div>
-          <input placeholder="Check In" onClick={() => this.handleClick('in')} />
+          <input id="checkIn" placeholder="Check In" onClick={() => this.handleClick('in')} />
           -&gt;
-          <input placeholder="Check Out" onClick={() => this.handleClick('out')} />
+          <input id="checkOut" placeholder="Check Out" onClick={() => this.handleClick('out')} />
           {inCalendar}
           {outCalendar}
         </div>
