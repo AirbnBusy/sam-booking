@@ -26,26 +26,31 @@ class Date extends React.Component {
       toggleCalendar,
     } = this.props;
 
+    const wrapperStyle = {
+      height: '100%',
+      width: '100%',
+      backgroundColor: this.state.hover ? '#e4e7e7' : 'inherit',
+    };
+
     const availStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%',
+      width: '100%',
       color: 'black',
       cursor: 'pointer',
-      backgroundColor: this.state.hover ? '#e4e7e7' : 'inherit',
       fontWeight: 600,
-      margin: 'none',
-      verticalAlign: 'center',
     };
 
     const unavailStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%',
+      width: '100%',
       color: 'grey',
       textDecoration: 'line-through',
-      cursor: 'pointer',
-      margin: 'none',
-      verticalAlign: 'center',
-    };
-
-    const blankStyle = {
-      margin: 'none',
-      verticalAlign: 'center',
     };
 
     const availDate = status === 'available' ? (
@@ -66,10 +71,10 @@ class Date extends React.Component {
       (<div style={unavailStyle}><span>{day}</span></div>) : null;
 
     const blankDate = status === 'blank' ?
-      (<div style={blankStyle} />) : null;
+      (<div />) : null;
 
     return (
-      <div className="date">
+      <div className="date" style={wrapperStyle}>
         {availDate}
         {unavailDate}
         {blankDate}

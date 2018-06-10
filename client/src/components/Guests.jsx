@@ -141,13 +141,12 @@ class Guests extends React.Component {
         <div style={labelStyle}>
           <span>Guests</span>
         </div>
-        <div style={inputContainerStyle}>
+        <div style={inputContainerStyle} onClick={() => this.handleClick()}>
           <input
             readOnly
             id="guestInput"
             style={inputStyle}
             value={guestSum}
-            onClick={() => this.handleClick()}
           />
         </div>
         {guestSelector}

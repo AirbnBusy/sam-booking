@@ -340,7 +340,7 @@ class App extends React.Component {
 
     return (
       <div style={deleteStyleLater}>
-        <form style={containerStyle} className="app">
+        <div style={containerStyle} className="app">
           <div style={Object.assign(priceDivStyle, infoStyle)}>
             <span style={priceSpanStyle}>{`$${this.state.baseRate}`}</span>
             <span style={perNightSpanStyle}>per night</span>
@@ -351,7 +351,7 @@ class App extends React.Component {
           <div style={infoStyle}>
             <button style={bookButtonStyle}>Request to Book</button>
           </div>
-        </form>
+        </div>
       </div>
     );
   }

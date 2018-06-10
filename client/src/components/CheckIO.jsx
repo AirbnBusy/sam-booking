@@ -69,9 +69,6 @@ class CheckIO extends React.Component {
     };
 
     const inInputStyle = {
-      ':focus': {
-        userSelect: 'none',
-      },
       height: '100%',
       width: '40%',
       fontFamily: 'Roboto',
