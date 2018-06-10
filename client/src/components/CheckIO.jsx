@@ -55,17 +55,65 @@ class CheckIO extends React.Component {
     } = this.props;
 
     const infoStyle = {
+      position: 'relative',
       textAlign: 'left',
-      width: '80%',
-      paddingTop: '.75em',
-      paddingBottom: '1em',
-      marginBottom: '.5em',
+      width: '90%',
+      marginBottom: '.75em',
     };
 
     const inOutStyle = {
       display: 'flex',
       justifyContent: 'space-between',
-      position: 'relative',
+      alignItems: 'center',
+      border: '1px solid #e4e4e4',
+    };
+
+    const inInputStyle = {
+      ':focus': {
+        userSelect: 'none',
+      },
+      height: '100%',
+      width: '40%',
+      fontFamily: 'Roboto',
+      border: 'none',
+      margin: '8px 10px',
+      fontSize: '17px',
+      outline: 'none',
+      color: 'transparent',
+      textShadow: this.state.inCalendarOpen ? '0 0 0 #118488' : '0 0 0 #757575',
+      backgroundColor: this.state.inCalendarOpen ? '#9CEDE6' : 'inherit',
+      userSelect: 'none',
+      borderRadius: '3px',
+      padding: '2px',
+    };
+
+    const outInputStyle = {
+      height: '100%',
+      width: '40%',
+      fontFamily: 'Roboto',
+      border: 'none',
+      margin: '8px 10px',
+      fontSize: '17px',
+      outline: 'none',
+      color: 'transparent',
+      textShadow: this.state.outCalendarOpen ? '0 0 0 #118488' : '0 0 0 #757575',
+      backgroundColor: this.state.outCalendarOpen ? '#9CEDE6' : 'inherit',
+      userSelect: 'none',
+      borderRadius: '3px',
+      padding: '2px',
+    };
+
+    const labelStyle = {
+      marginBottom: '5px',
+      fontSize: '12px',
+      fontWeight: 600,
+    };
+
+    const arrowStyle = {
+      height: '24px',
+      width: '24px',
+      display: 'block',
+      fill: 'currentColor',
     };
 
     const inCalendar = this.state.inCalendarOpen ? (<Calendar
@@ -105,28 +153,42 @@ class CheckIO extends React.Component {
 
     return (
       <div style={infoStyle}>
-        Dates
-        <div style={inOutStyle}>
-          <div>
-            <input
-              id="checkIn"
-              placeholder="Check In"
-              value={inDate}
-              onClick={() => this.toggleCalendar('in')}
-            />
-            {inCalendar}
-          </div>
-          -&gt;
-          <div>
-            <input
-              id="checkOut"
-              placeholder="Check Out"
-              value={outDate}
-              onClick={() => this.toggleCalendar('out')}
-            />
-            {outCalendar}
-          </div>
+        <div style={labelStyle}>
+          <span>Dates</span>
         </div>
+        <div style={inOutStyle}>
+          <input
+            style={inInputStyle}
+            id="checkIn"
+            placeholder="Check In"
+            value={inDate}
+            onClick={() => this.inToggleCalendar()}
+          />
+          <svg
+            viewBox="0 0 24 24"
+            role="presentation"
+            aria-hidden="true"
+            focusable="false"
+            style={arrowStyle}
+          >
+            <path
+              d="m0 12.5a.5.5 0 0 0 .5.5h21.79l-6.15 6.15a.5.5 0 1 0
+                .71.71l7-7v-.01a.5.5 0 0 0 .14-.35.5.5 0 0 0
+                -.14-.35v-.01l-7-7a .5.5 0 0 0 -.71.71l6.15
+                6.15h-21.79a.5.5 0 0 0 -.5.5z"
+              fillRule="evenodd"
+            />
+          </svg>
+          <input
+            style={outInputStyle}
+            id="checkOut"
+            placeholder="Check Out"
+            value={outDate}
+            onClick={() => this.outToggleCalendar()}
+          />
+        </div>
+        {inCalendar}
+        {outCalendar}
       </div>
     );
   }

@@ -29,17 +29,23 @@ class Date extends React.Component {
     const availStyle = {
       color: 'black',
       cursor: 'pointer',
-      backgroundColor: this.state.hover ? 'grey' : 'inherit',
+      backgroundColor: this.state.hover ? '#e4e7e7' : 'inherit',
+      fontWeight: 600,
+      margin: 'none',
+      verticalAlign: 'center',
     };
 
     const unavailStyle = {
       color: 'grey',
       textDecoration: 'line-through',
       cursor: 'pointer',
+      margin: 'none',
+      verticalAlign: 'center',
     };
 
     const blankStyle = {
-      backgroundColor: 'grey',
+      margin: 'none',
+      verticalAlign: 'center',
     };
 
     const availDate = status === 'available' ? (
@@ -53,11 +59,11 @@ class Date extends React.Component {
           toggleCalendar();
         }}
       >
-        {day}
+        <span>{day}</span>
       </div>) : null;
 
     const unavailDate = status === 'unavailable' ?
-      (<div style={unavailStyle}> {day} </div>) : null;
+      (<div style={unavailStyle}><span>{day}</span></div>) : null;
 
     const blankDate = status === 'blank' ?
       (<div style={blankStyle} />) : null;

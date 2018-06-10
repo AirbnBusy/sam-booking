@@ -15,17 +15,27 @@ const Summary = ({
   const infoStyle = {
     textAlign: 'left',
     width: '100%',
-    paddingTop: '.75em',
-    paddingBottom: '1em',
+    paddingTop: '.25em',
+    paddingBottom: '.5em',
     marginBottom: '.5em',
-    borderBottom: '1px solid grey',
+    borderBottom: '1px solid #e4e4e4',
     display: 'flex',
     justifyContent: 'space-between',
+    fontWeight: 'normal',
   };
 
   const passStyle = {
-    width: '80%',
+    width: '90%',
     height: '100%',
+  };
+
+  const totalStyle = {
+    textAlign: 'left',
+    width: '100%',
+    paddingTop: '.25em',
+    display: 'flex',
+    justifyContent: 'space-between',
+    fontWeight: 800,
   };
 
   return (
@@ -46,7 +56,7 @@ const Summary = ({
         <span>Occupancy Taxes</span>
         <span>{`$${occupancyTaxes}`}</span>
       </div>
-      <div style={infoStyle}>
+      <div style={totalStyle}>
         <span>Total</span>
         <span>{`$${totalCost}`}</span>
       </div>

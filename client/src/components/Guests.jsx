@@ -35,17 +35,42 @@ class Guests extends React.Component {
     const infoStyle = {
       position: 'relative',
       textAlign: 'left',
-      width: '80%',
-      paddingTop: '.75em',
-      paddingBottom: '1em',
-      marginBottom: '.5em',
+      width: '90%',
+      color: '#484848',
+      marginBottom: '1em',
+    };
+
+    const labelStyle = {
+      marginBottom: '5px',
+      fontSize: '12px',
+      fontWeight: 600,
     };
 
     const selectorStyle = {
       position: 'absolute',
       backgroundColor: 'white',
-      border: '1px solid black',
+      border: '1px solid #e4e4e4',
       width: '100%',
+    };
+
+    const inputContainerStyle = {
+      fontFamily: 'Roboto',
+      border: '1px solid #e4e4e4',
+    };
+
+    const inputStyle = {
+      height: '100%',
+      width: '40%',
+      fontFamily: 'Roboto',
+      border: 'none',
+      margin: '6px 10px',
+      fontSize: '17px',
+      outline: 'none',
+      color: 'transparent',
+      textShadow: '0 0 0 #757575',
+      userSelect: 'none',
+      borderRadius: '3px',
+      padding: '2px',
     };
 
     const guestSum = currentGuestSum > 1 ?
@@ -113,9 +138,17 @@ class Guests extends React.Component {
 
     return (
       <div style={infoStyle} className="guests">
-        Guests
-        <div>
-          <input readOnly id="guestInput" value={guestSum} onClick={() => this.handleClick()} />
+        <div style={labelStyle}>
+          <span>Guests</span>
+        </div>
+        <div style={inputContainerStyle}>
+          <input
+            readOnly
+            id="guestInput"
+            style={inputStyle}
+            value={guestSum}
+            onClick={() => this.handleClick()}
+          />
         </div>
         {guestSelector}
       </div>

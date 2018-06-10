@@ -38,8 +38,11 @@ const Calendar = ({
     });
 
   const wrapperStyle = {
-    backgroundColor: 'lightblue',
-    width: '55%',
+    backgroundColor: '#ffffff',
+    border: '1px solid #e4e4e4',
+    borderRadius: '5px',
+    width: '100%',
+    height: '300px',
     textAlign: 'center',
     position: 'absolute',
     zIndex: 1,
@@ -48,6 +51,8 @@ const Calendar = ({
   const gridStyle = {
     display: 'grid',
     gridTemplateColumns: 'repeat(7, 1fr)',
+    gridAutoRows: '1fr',
+    justifyItems: 'center',
   };
 
   return (

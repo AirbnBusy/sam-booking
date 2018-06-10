@@ -115,7 +115,6 @@ class App extends React.Component {
     axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/calendar/${yearMonthString}`)
       .then((res) => {
         const { data } = res;
-        console.log(data);
         this.setState({
           currentCalendarDatesUnavailable: data.days,
           firstDayPosition: data.firstDayOfMonth,
@@ -248,24 +247,49 @@ class App extends React.Component {
     };
 
     const containerStyle = {
-      border: '1px solid black',
+      border: '1px solid #e4e4e4',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       width: '25%',
       padding: '.5em',
+      fontFamily: 'Roboto',
+      color: '#484848',
     };
 
     const infoStyle = {
       textAlign: 'left',
-      width: '80%',
+      width: '90%',
       paddingTop: '.75em',
       paddingBottom: '1em',
       marginBottom: '.5em',
     };
 
-    const priceStyle = {
-      borderBottom: '1px solid grey',
+    const priceDivStyle = {
+      borderBottom: '1px solid #e4e4e4',
+    };
+
+    const bookButtonStyle = {
+      backgroundColor: '#FF5A5F',
+      color: '#ffffff',
+      fontSize: '16px',
+      width: '100%',
+      height: '50px',
+      border: 'none',
+      cursor: 'pointer',
+      borderRadius: '5px',
+      fontWeight: 600,
+    };
+
+    const priceSpanStyle = {
+      fontSize: '22px',
+      fontWeight: 800,
+    };
+
+    const perNightSpanStyle = {
+      margin: '3px',
+      fontSize: '12px',
+      fontWeight: 600,
     };
 
     const calendar = {
@@ -317,14 +341,15 @@ class App extends React.Component {
     return (
       <div style={deleteStyleLater}>
         <form style={containerStyle} className="app">
-          <div style={Object.assign(priceStyle, infoStyle)}>
-            {`$${this.state.baseRate} per night`}
+          <div style={Object.assign(priceDivStyle, infoStyle)}>
+            <span style={priceSpanStyle}>{`$${this.state.baseRate}`}</span>
+            <span style={perNightSpanStyle}>per night</span>
           </div>
           <CheckIO calendar={calendar} />
           <Guests guests={guests} />
           {summaryComponent}
-          <div>
-            <button>Request to Book</button>
+          <div style={infoStyle}>
+            <button style={bookButtonStyle}>Request to Book</button>
           </div>
         </form>
       </div>
