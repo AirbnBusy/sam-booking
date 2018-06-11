@@ -17,17 +17,10 @@ class CheckIO extends React.Component {
 
   toggleCalendar(calendarType) {
     if (calendarType === 'in') {
-      if (this.state.inCalendarOpen && !this.props.calendar.selectedCheckOutDate) {
-        this.setState(prevState => ({
-          inCalendarOpen: !prevState.inCalendarOpen,
-          outCalendarOpen: true,
-        }));
-      } else {
-        this.setState(prevState => ({
-          inCalendarOpen: !prevState.inCalendarOpen,
-          outCalendarOpen: false,
-        }));
-      }
+      this.setState(prevState => ({
+        inCalendarOpen: !prevState.inCalendarOpen,
+        outCalendarOpen: false,
+      }));
     } else if (calendarType === 'out') {
       this.setState(prevState => ({
         inCalendarOpen: false,

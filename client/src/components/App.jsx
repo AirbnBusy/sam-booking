@@ -279,6 +279,7 @@ class App extends React.Component {
       cursor: 'pointer',
       borderRadius: '5px',
       fontWeight: 600,
+      outline: 'none',
     };
 
     const priceSpanStyle = {

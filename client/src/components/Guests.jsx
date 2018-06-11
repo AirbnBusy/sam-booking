@@ -53,6 +53,33 @@ class Guests extends React.Component {
       width: '100%',
     };
 
+    const incDecButtonStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      height: '35px',
+      width: '35px',
+      borderRadius: '50%',
+      outline: 'none',
+    };
+
+    const incDecContainerStyle = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '25px',
+    };
+
+    const buttonContainer = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '45%',
+    };
+
+    const selectorContainerStyle = {
+      margin: '15px',
+    };
+
     const inputContainerStyle = {
       fontFamily: 'Roboto',
       border: '1px solid #e4e4e4',
@@ -79,60 +106,90 @@ class Guests extends React.Component {
 
     const guestSelector = this.state.guestSelectorOpen ? (
       <div style={selectorStyle}>
-        <div className="guestIncDec">
-          Adults
-          <button
-            type="button"
-            id="adultDec"
-            onClick={() => decrementGuests('adult')}
-            disabled={!adultDecButtonActive}
-          >
-          -
-          </button>
-          {currentAdultSum}
-          <button
-            type="button"
-            id="adultInc"
-            onClick={() => incrementGuests('adult')}
-            disabled={!allIncButtonsActive}
-          >
-          +
-          </button>
+        <div style={selectorContainerStyle}>
+          <div className="guestIncDec" style={incDecContainerStyle}>
+            Adults
+            <div style={buttonContainer}>
+              <button
+                style={incDecButtonStyle}
+                type="button"
+                id="adultDec"
+                onClick={() => decrementGuests('adult')}
+                disabled={!adultDecButtonActive}
+              >
+              <svg viewBox="0 0 24 24" role="img" style={{ height: '1em', width: '1em', display: 'block', fill: 'currentcolor' }}>
+                  <rect height="2" rx="1" width="12" x="6" y="11" />
+              </svg>
+              </button>
+              {currentAdultSum}
+              <button
+                style={incDecButtonStyle}
+                type="button"
+                id="adultInc"
+                onClick={() => incrementGuests('adult')}
+                disabled={!allIncButtonsActive}
+              >
+                <svg viewBox="0 0 24 24" role="img" style={{ height: '1em', width: '1em', display: 'block', fill: 'currentcolor' }}>
+                  <rect height="2" rx="1" width="12" x="6" y="11" />
+                  <rect height="12" rx="1" width="2" x="11" y="6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className="guestIncDec" style={incDecContainerStyle}>
+            Children
+            <div style={buttonContainer}>
+              <button
+                style={incDecButtonStyle}
+                type="button"
+                id="childDec"
+                onClick={() => decrementGuests('child')}
+                disabled={!childDecButtonActive}
+              >
+              <svg viewBox="0 0 24 24" role="img" style={{ height: '1em', width: '1em', display: 'block', fill: 'currentcolor' }}>
+                  <rect height="2" rx="1" width="12" x="6" y="11" />
+              </svg>
+              </button>
+              {currentChildSum}
+              <button
+                style={incDecButtonStyle}
+                type="button"
+                id="childInc"
+                onClick={() => incrementGuests('child')}
+                disabled={!allIncButtonsActive}
+              >
+                <svg viewBox="0 0 24 24" role="img" style={{ height: '1em', width: '1em', display: 'block', fill: 'currentcolor' }}>
+                  <rect height="2" rx="1" width="12" x="6" y="11" />
+                  <rect height="12" rx="1" width="2" x="11" y="6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className="guestIncDec" style={incDecContainerStyle}>
+            Infants
+            <div style={buttonContainer}>
+              <button
+                style={incDecButtonStyle}
+                type="button"
+                id="infantInc"
+                onClick={() => decrementGuests('infant')}
+                disabled={!infantDecButtonActive}
+              >
+                <svg viewBox="0 0 24 24" role="img" style={{ height: '1em', width: '1em', display: 'block', fill: 'currentcolor' }}>
+                  <rect height="2" rx="1" width="12" x="6" y="11" />
+                </svg>
+              </button>
+              {currentInfantSum}
+              <button type="button" id="infantInc" onClick={() => incrementGuests('infant')} style={incDecButtonStyle}>
+                <svg viewBox="0 0 24 24" role="img" style={{ height: '1em', width: '1em', display: 'block', fill: 'currentcolor' }}>
+                  <rect height="2" rx="1" width="12" x="6" y="11" />
+                  <rect height="12" rx="1" width="2" x="11" y="6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          {maxGuests} guests maximum. Infants don’t count toward the number of guests.
         </div>
-        <div className="guestIncDec">
-          Children
-          <button
-            type="button"
-            id="childDec"
-            onClick={() => decrementGuests('child')}
-            disabled={!childDecButtonActive}
-          >
-          -
-          </button>
-          {currentChildSum}
-          <button
-            type="button"
-            id="childInc"
-            onClick={() => incrementGuests('child')}
-            disabled={!allIncButtonsActive}
-          >
-          +
-          </button>
-        </div>
-        <div className="guestIncDec">
-          Infants
-          <button
-            type="button"
-            id="infantInc"
-            onClick={() => decrementGuests('infant')}
-            disabled={!infantDecButtonActive}
-          >
-          -
-          </button>
-          {currentInfantSum}
-          <button type="button" id="infantInc" onClick={() => incrementGuests('infant')}>+</button>
-        </div>
-        {maxGuests} guests maximum. Infants don’t count toward the number of guests.
       </div>) :
       null;
 
