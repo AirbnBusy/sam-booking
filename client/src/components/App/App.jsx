@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import CheckIO from './CheckIO';
-import Guests from './Guests';
-import Summary from './Summary';
+import CheckIO from '../CheckIO/CheckIO';
+import Guests from '../Guests/Guests';
+import Summary from '../Summary/Summary';
 
 class App extends React.Component {
   constructor(props) {

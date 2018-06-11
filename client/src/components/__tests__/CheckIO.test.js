@@ -1,9 +1,9 @@
 import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import CheckIO from '../CheckIO';
+import CheckIO from '../CheckIO/CheckIO';
 
 configure({ adapter: new Adapter() });
 

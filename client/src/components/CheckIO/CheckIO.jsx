@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Calendar from './Calendar';
+import Calendar from '../Calendar/Calendar';
 
 class CheckIO extends React.Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import Guests from '../Guests';
+import Guests from '../Guests/Guests';
 
 configure({ adapter: new Adapter() });
 
