@@ -39,33 +39,31 @@ const Summary = ({
     serviceFee,
     totalCost,
   },
-}) => {
+}) => (
+  <Wrapper>
+    <CostField>
+      <span>{`$${baseRate} x ${numberOfNightsSelected} Nights`}</span>
+      <span>{`$${baseRateXNights}`}</span>
+    </CostField>
+    <CostField>
+      <span>Cleaning Fee</span>
+      <span>{`$${cleaningFee}`}</span>
+    </CostField>
+    <CostField>
+      <span>Service Fee</span>
+      <span>{`$${serviceFee}`}</span>
+    </CostField>
+    <CostField>
+      <span>Occupancy Taxes</span>
+      <span>{`$${occupancyTaxes}`}</span>
+    </CostField>
+    <Total>
+      <span>Total</span>
+      <span>{`$${totalCost}`}</span>
+    </Total>
+  </Wrapper>
+);
 
-  return (
-    <Wrapper>
-      <CostField>
-        <span>{`$${baseRate} x ${numberOfNightsSelected} Nights`}</span>
-        <span>{`$${baseRateXNights}`}</span>
-      </CostField>
-      <CostField>
-        <span>Cleaning Fee</span>
-        <span>{`$${cleaningFee}`}</span>
-      </CostField>
-      <CostField>
-        <span>Service Fee</span>
-        <span>{`$${serviceFee}`}</span>
-      </CostField>
-      <CostField>
-        <span>Occupancy Taxes</span>
-        <span>{`$${occupancyTaxes}`}</span>
-      </CostField>
-      <Total>
-        <span>Total</span>
-        <span>{`$${totalCost}`}</span>
-      </Total>
-    </Wrapper>
-  );
-};
 
 Summary.propTypes = {
   summary: PropTypes.shape({
