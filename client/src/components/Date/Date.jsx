@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const DateContainer = styled.div`
   height: 100%;
   width: 100%;
-  background-color: ${props => props.hovered ? '#e4e7e7' : 'inherit'};
+  background-color: ${props => (props.hovered ? '#e4e7e7' : 'inherit')};
 `;
 
 const AvailableDate = styled.div`
