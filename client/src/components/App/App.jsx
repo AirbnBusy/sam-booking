@@ -3,6 +3,14 @@ import axios from 'axios';
 import CheckIO from '../CheckIO/CheckIO';
 import Guests from '../Guests/Guests';
 import Summary from '../Summary/Summary';
+import {
+  Price,
+  PerNight,
+  AppWrapper,
+  PriceWrapper,
+  BookButtonWrapper,
+  BookButton,
+} from './AppStyles';
 
 class App extends React.Component {
   constructor(props) {
@@ -62,16 +70,22 @@ class App extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentMonth !== this.state.currentMonth) {
       this.getCalendar();
-    } else if (prevState.currentAdultSum !== this.state.currentAdultSum ||
-              prevState.currentChildSum !== this.state.currentChildSum ||
-              prevState.currentInfantSum !== this.state.currentInfantSum) {
+    } else if (
+      prevState.currentAdultSum !== this.state.currentAdultSum
+        || prevState.currentChildSum !== this.state.currentChildSum
+        || prevState.currentInfantSum !== this.state.currentInfantSum
+    ) {
       this.sumGuests();
-    } else if (prevState.selectedCheckInDate !== this.state.selectedCheckInDate ||
-              prevState.selectedCheckOutDate !== this.state.selectedCheckOutDate) {
+    } else if (
+      prevState.selectedCheckInDate !== this.state.selectedCheckInDate
+        || prevState.selectedCheckOutDate !== this.state.selectedCheckOutDate
+    ) {
       this.sumDates();
-    } else if (this.state.numberOfNightsSelected
-              && this.state.baseRate
-              && prevState.numberOfNightsSelected !== this.state.numberOfNightsSelected) {
+    } else if (
+      this.state.numberOfNightsSelected
+        && this.state.baseRate
+        && prevState.numberOfNightsSelected !== this.state.numberOfNightsSelected
+    ) {
       this.setVariableCosts();
     }
   }
@@ -241,56 +255,9 @@ class App extends React.Component {
   }
 
   render() {
-    const deleteStyleLater = {
+    const DELETE_DIV_AND_STYLE_LATER = {
       display: 'flex',
       justifyContent: 'center',
-    };
-
-    const containerStyle = {
-      border: '1px solid #e4e4e4',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '25%',
-      padding: '.5em',
-      fontFamily: 'Roboto',
-      color: '#484848',
-    };
-
-    const infoStyle = {
-      textAlign: 'left',
-      width: '90%',
-      paddingTop: '.75em',
-      paddingBottom: '1em',
-      marginBottom: '.5em',
-    };
-
-    const priceDivStyle = {
-      borderBottom: '1px solid #e4e4e4',
-    };
-
-    const bookButtonStyle = {
-      backgroundColor: '#FF5A5F',
-      color: '#ffffff',
-      fontSize: '16px',
-      width: '100%',
-      height: '50px',
-      border: 'none',
-      cursor: 'pointer',
-      borderRadius: '5px',
-      fontWeight: 600,
-      outline: 'none',
-    };
-
-    const priceSpanStyle = {
-      fontSize: '22px',
-      fontWeight: 800,
-    };
-
-    const perNightSpanStyle = {
-      margin: '3px',
-      fontSize: '12px',
-      fontWeight: 600,
     };
 
     const calendar = {
@@ -335,24 +302,25 @@ class App extends React.Component {
     const summaryComponent = (
       this.state.currentGuestSum
       && this.state.selectedCheckInDate
-      && this.state.selectedCheckOutDate)
+      && this.state.selectedCheckOutDate
+    )
       ? (<Summary summary={summary} />)
       : null;
 
     return (
-      <div style={deleteStyleLater}>
-        <div style={containerStyle} className="app">
-          <div style={Object.assign(priceDivStyle, infoStyle)}>
-            <span style={priceSpanStyle}>{`$${this.state.baseRate}`}</span>
-            <span style={perNightSpanStyle}>per night</span>
-          </div>
+      <div style={DELETE_DIV_AND_STYLE_LATER}>
+        <AppWrapper className="app">
+          <PriceWrapper>
+            <Price>{`$${this.state.baseRate}`}</Price>
+            <PerNight>per night</PerNight>
+          </PriceWrapper>
           <CheckIO calendar={calendar} />
           <Guests guests={guests} />
           {summaryComponent}
-          <div style={infoStyle}>
-            <button style={bookButtonStyle}>Request to Book</button>
-          </div>
-        </div>
+          <BookButtonWrapper>
+            <BookButton>Request to Book</BookButton>
+          </BookButtonWrapper>
+        </AppWrapper>
       </div>
     );
   }
