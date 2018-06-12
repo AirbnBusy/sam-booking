@@ -45,7 +45,7 @@ app.get('/api/listings/:listingId/calendar/:yearMonth', (req, res) => {
         monthName,
         numberOfDaysInMonth,
         firstDayOfMonth,
-        year,
+        year: Number(year),
         listingId: req.params.listingId,
       };
       res.send(responseObj);

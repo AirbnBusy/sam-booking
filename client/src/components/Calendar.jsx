@@ -14,15 +14,35 @@ const Calendar = (props) => {
       return <Date key={day} index={day} status="unavailable" />;
     });
 
-  const style = {
+  const wrapperStyle = {
+    backgroundColor: 'lightblue',
+    width: '20%',
+    textAlign: 'center',
+  };
 
+  const gridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(7, 1fr)',
   };
 
   return (
-    <div style={style} className="calendar">
+    <div style={wrapperStyle}>
+      <button onClick={() => props.decrementCalendar()}>&lt;</button>
       {props.currentYearMonth}
-      {firstBlankDates}
-      {monthDates}
+      <button onClick={() => props.incrementCalendar()}>&gt;</button>
+      <div style={gridStyle}>
+        <div>Su</div>
+        <div>Mo</div>
+        <div>Tu</div>
+        <div>We</div>
+        <div>Th</div>
+        <div>Fr</div>
+        <div>Sa</div>
+      </div>
+      <div style={gridStyle} className="calendar">
+        {firstBlankDates}
+        {monthDates}
+      </div>
     </div>
   );
 };
@@ -32,6 +52,8 @@ Calendar.propTypes = {
   firstDayPosition: PropTypes.number.isRequired,
   daysInMonth: PropTypes.number.isRequired,
   currentYearMonth: PropTypes.string.isRequired,
+  incrementCalendar: PropTypes.func.isRequired,
+  decrementCalendar: PropTypes.func.isRequired,
 };
 
 export default Calendar;

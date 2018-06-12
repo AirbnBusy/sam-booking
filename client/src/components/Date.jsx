@@ -7,11 +7,12 @@ const Date = (props) => {
   };
 
   const unavailStyle = {
-    color: 'red',
+    color: 'grey',
+    textDecoration: 'line-through',
   };
 
   const blankStyle = {
-    backgroundColor: 'black',
+    backgroundColor: 'grey',
   };
 
   const availDate = props.status === 'available' ?
@@ -21,7 +22,7 @@ const Date = (props) => {
     (<div style={unavailStyle}> {props.index} </div>) : null;
 
   const blankDate = props.status === 'blank' ?
-    (<div style={blankStyle}> {props.index} </div>) : null;
+    (<div style={blankStyle} />) : null;
 
   return (
     <div className="date">
