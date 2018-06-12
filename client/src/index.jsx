@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App/App';
+import Bookings from './components/Bookings/Bookings';
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('app'),
+  <Bookings />,
+  document.getElementById('bookings'),
 );

@@ -2,22 +2,21 @@ import React from 'react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import mockAxios from 'jest-mock-axios';
-import sinon from 'sinon';
-import App from '../App/App';
+import Bookings from '../Bookings/Bookings';
 
 configure({ adapter: new Adapter() });
 
 describe('App Component', () => {
-  const wrapperApp = mount(<App />);
+  const wrapperBookings = mount(<Bookings />);
 
   it('should render without throwing an error', () => {
-    expect(wrapperApp.find('App').exists()).toBe(true);
+    expect(wrapperBookings.find('Bookings').exists()).toBe(true);
   });
 
   it('should fetch listing data', () => {
     const thenFn = jest.fn();
     const catchFn = jest.fn();
-    wrapperApp.instance().getListing().then(thenFn).catch(catchFn);
+    wrapperBookings.instance().getListing().then(thenFn).catch(catchFn);
 
     const res = {
       data: {
