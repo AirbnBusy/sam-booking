@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
-const IncrementDecrementButton = styled.button`
+const IncrementButton = styled.button`
   display: flex;
   justify-content: center;
   height: 35px;
   width: 35px;
   border-radius: 50%;
   outline: none;
+`;
+
+const DecrementButton = IncrementButton.extend`
 `;
 
 const IncDecButtonWrapper = styled.div`
@@ -66,7 +69,8 @@ const FieldWrapper = styled.div`
 
 module.exports = {
   GuestSelector,
-  IncrementDecrementButton,
+  IncrementButton,
+  DecrementButton,
   IncDecButtonWrapper,
   IncDecWrapper,
   GuestInput,
@@ -74,3 +78,13 @@ module.exports = {
   FieldLabel,
   FieldWrapper,
 };
+
+GuestSelector.displayName = 'GuestSelector';
+IncrementButton.displayName = 'IncrementButton';
+DecrementButton.displayName = 'DecrementButton';
+IncDecButtonWrapper.displayName = 'IncDecButtonWrapper';
+IncDecWrapper.displayName = 'IncDecWrapper';
+GuestInput.displayName = 'GuestInput';
+FieldLabel.displayName = 'FieldLabel';
+FieldWrapper.displayName = 'FieldWrapper';
+

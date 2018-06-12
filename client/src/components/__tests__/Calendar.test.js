@@ -42,11 +42,11 @@ describe('Calendar Component', () => {
   />);
 
   it('should render without throwing an error', () => {
-    expect(shallowCal.find('.calendar').exists()).to.equal(true);
+    expect(shallowCal.find('CalendarGrid').exists()).to.equal(true);
   });
 
   it('should render the total amount of date divs "blank", "available", and "unavailable"', () => {
-    expect(wrapperCal.find('.calendar').children().length).to.equal(35);
+    expect(wrapperCal.find('CalendarGrid').children().length).to.equal(35);
   });
 
   it('should respond to click event with increment function call', () => {
@@ -59,3 +59,4 @@ describe('Calendar Component', () => {
     expect(decrementCalendar).to.have.property('callCount', 1);
   });
 });
+

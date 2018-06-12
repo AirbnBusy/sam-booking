@@ -58,4 +58,6 @@ module.exports = {
   DaysOfTheWeek,
   CalendarGrid,
   Month,
-}
+};
+
+CalendarGrid.displayName = 'CalendarGrid';

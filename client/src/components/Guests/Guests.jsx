@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {
   GuestSelector,
   GuestInput,
-  IncrementDecrementButton,
+  IncrementButton,
+  DecrementButton,
   IncDecButtonWrapper,
   IncDecWrapper,
   GuestInputBorder,
@@ -83,62 +84,57 @@ class Guests extends React.Component {
         <IncDecWrapper className="guestIncDec">
           Adults
           <IncDecButtonWrapper>
-            <IncrementDecrementButton
+            <DecrementButton
               type="button"
-              id="adultDec"
               onClick={() => decrementGuests('adult')}
               disabled={!adultDecButtonActive}
             >
               {minusImg}
-            </IncrementDecrementButton>
+            </DecrementButton>
             {currentAdultSum}
-            <IncrementDecrementButton
+            <IncrementButton
               type="button"
-              id="adultInc"
               onClick={() => incrementGuests('adult')}
               disabled={!allIncButtonsActive}
             >
               {plusImg}
-            </IncrementDecrementButton>
+            </IncrementButton>
           </IncDecButtonWrapper>
         </IncDecWrapper>
         <IncDecWrapper className="guestIncDec">
           Children
           <IncDecButtonWrapper>
-            <IncrementDecrementButton
+            <DecrementButton
               type="button"
-              id="childDec"
               onClick={() => decrementGuests('child')}
               disabled={!childDecButtonActive}
             >
               {minusImg}
-            </IncrementDecrementButton>
+            </DecrementButton>
             {currentChildSum}
-            <IncrementDecrementButton
+            <IncrementButton
               type="button"
-              id="childInc"
               onClick={() => incrementGuests('child')}
               disabled={!allIncButtonsActive}
             >
               {plusImg}
-            </IncrementDecrementButton>
+            </IncrementButton>
           </IncDecButtonWrapper>
         </IncDecWrapper>
         <IncDecWrapper className="guestIncDec">
           Infants
           <IncDecButtonWrapper>
-            <IncrementDecrementButton
+            <DecrementButton
               type="button"
-              id="infantInc"
               onClick={() => decrementGuests('infant')}
               disabled={!infantDecButtonActive}
             >
               {minusImg}
-            </IncrementDecrementButton>
+            </DecrementButton>
             {currentInfantSum}
-            <IncrementDecrementButton type="button" id="infantInc" onClick={() => incrementGuests('infant')}>
+            <IncrementButton type="button" id="infantInc" onClick={() => incrementGuests('infant')}>
               {plusImg}
-            </IncrementDecrementButton>
+            </IncrementButton>
           </IncDecButtonWrapper>
         </IncDecWrapper>
         {maxGuests} guests maximum. Infants don’t count toward the number of guests.
@@ -151,7 +147,7 @@ class Guests extends React.Component {
           <span>Guests</span>
         </FieldLabel>
         <GuestInputBorder onClick={() => this.handleClick()}>
-          <GuestInput readOnly id="guestInput" value={guestSum} />
+          <GuestInput readOnly value={guestSum} />
         </GuestInputBorder>
         {guestSelector}
       </FieldWrapper>
