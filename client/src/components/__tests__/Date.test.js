@@ -36,7 +36,6 @@ describe('Date Component', () => {
   });
 
   it('should toggleHover when date is hovered', () => {
-    console.log(wrapperDate.state.hovered);
     expect(wrapperDate.state().hovered).to.equal(false);
     wrapperDate.find('AvailableDate').simulate('mouseEnter');
     expect(wrapperDate.state().hovered).to.equal(true);

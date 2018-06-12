@@ -104,7 +104,7 @@ class App extends React.Component {
   }
 
   getListing() {
-    axios.get(`http://localhost:3001/api/listings/${this.state.listingId}`)
+    return axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/bookings/listingInfo`)
       .then((res) => {
         const { data } = res;
         this.setState({
@@ -126,8 +126,9 @@ class App extends React.Component {
       `${this.state.currentMonth.toString()}`;
     const yearMonthString = `${yearString}${monthString}`;
 
-    axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/calendar/${yearMonthString}`)
+    axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/bookings/calendar/${yearMonthString}`)
       .then((res) => {
+        console.log(res);
         const { data } = res;
         this.setState({
           currentCalendarDatesUnavailable: data.days,

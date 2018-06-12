@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Calendar from '../Calendar/Calendar';
-import { CheckIOInput, CheckIOInputWrapper } from './CheckIOStyles';
+import { CheckInInput, CheckOutInput, CheckIOInputWrapper } from './CheckIOStyles';
 import { FieldLabel, FieldWrapper } from '../Guests/GuestsStyles';
 
 class CheckIO extends React.Component {
@@ -50,7 +50,6 @@ class CheckIO extends React.Component {
     } = this.props;
 
     const inCalendar = this.state.inCalendarOpen ? (<Calendar
-      id="inCal"
       daysUnav={currentCalendarDatesUnavailable}
       firstDayPosition={firstDayPosition}
       daysInMonth={numberOfDaysInMonth}
@@ -66,7 +65,6 @@ class CheckIO extends React.Component {
     />) : null;
 
     const outCalendar = this.state.outCalendarOpen ? (<Calendar
-      id="outCal"
       daysUnav={currentCalendarDatesUnavailable}
       firstDayPosition={firstDayPosition}
       daysInMonth={numberOfDaysInMonth}
@@ -113,17 +111,15 @@ class CheckIO extends React.Component {
           <span>Dates</span>
         </FieldLabel>
         <CheckIOInputWrapper>
-          <CheckIOInput
+          <CheckInInput
             calendarOpen={this.state.inCalendarOpen}
-            id="checkIn"
             placeholder="Check In"
             value={inDate}
             onClick={() => this.inToggleCalendar()}
           />
           {arrow}
-          <CheckIOInput
+          <CheckOutInput
             calendarOpen={this.state.outCalendarOpen}
-            id="checkOut"
             placeholder="Check Out"
             value={outDate}
             onClick={() => this.outToggleCalendar()}

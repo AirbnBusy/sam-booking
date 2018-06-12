@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CheckIOInput = styled.input`
+const CheckInInput = styled.input`
   height: 100%;
   width: 40%;
   font-family: Roboto;
@@ -15,6 +15,8 @@ const CheckIOInput = styled.input`
   border-radius: 3px;
   padding: 2px;
 `;
+const CheckOutInput = CheckInInput.extend`
+`;
 
 const CheckIOInputWrapper = styled.div`
   display: flex;
@@ -24,6 +26,10 @@ const CheckIOInputWrapper = styled.div`
 `;
 
 module.exports = {
-  CheckIOInput,
+  CheckInInput,
+  CheckOutInput,
   CheckIOInputWrapper,
 };
+
+CheckInInput.displayName = 'CheckInInput';
+CheckOutInput.displayName = 'CheckOutInput';

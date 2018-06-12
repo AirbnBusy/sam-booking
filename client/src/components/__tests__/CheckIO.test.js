@@ -25,21 +25,21 @@ describe('CheckIO Component Tests', () => {
 
   it('should render a calendar when checkIn input is clicked', () => {
     const wrapper = mount(<CheckIO calendar={calendar} />);
-    wrapper.find('#checkIn').simulate('click');
-    expect(wrapper.find('#inCal').exists()).to.equal(true);
+    wrapper.find('CheckInInput').simulate('click');
+    expect(wrapper.find('Calendar').exists()).to.equal(true);
   });
 
   it('should remove a calendar when checkIn input is clicked twice', () => {
     const wrapper = mount(<CheckIO calendar={calendar} />);
-    wrapper.find('#checkIn').simulate('click');
-    wrapper.find('#checkIn').simulate('click');
-    expect(wrapper.find('#inCal').exists()).to.equal(false);
+    wrapper.find('CheckInInput').simulate('click');
+    wrapper.find('CheckInInput').simulate('click');
+    expect(wrapper.find('Calendar').exists()).to.equal(false);
   });
 
-  it('should switch to outCalendar when checkIn input is clicked then checkOut input is clicked', () => {
+  it('should toggleCalendar when available date is clicked†', () => {
     const wrapper = mount(<CheckIO calendar={calendar} />);
-    wrapper.find('#checkIn').simulate('click');
-    wrapper.find('#checkOut').simulate('click');
-    expect(wrapper.find('#outCal').exists()).to.equal(true);
+    wrapper.find('CheckInInput').simulate('click');
+    wrapper.find('AvailableDate').first().simulate('click');
+    expect(wrapper.find('Calendar').exists()).to.equal(false);
   });
 });

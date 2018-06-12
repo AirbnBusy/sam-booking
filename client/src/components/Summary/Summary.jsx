@@ -77,4 +77,6 @@ Summary.propTypes = {
   }).isRequired,
 };
 
+Summary.displayName = 'Summary';
+
 export default Summary;
