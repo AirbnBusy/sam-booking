@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Calendar from './Calendar';
+import CheckIO from './CheckIO';
+import Guests from './Guests';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,6 +24,11 @@ class App extends React.Component {
       firstDayPosition: 0,
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
+
+      currentGuestSum: 1,
+      currentAdultSum: 1,
+      currentChildSum: 0,
+      currentInfantSum: 0,
     };
 
     this.incrementCalendar = this.incrementCalendar.bind(this);
@@ -102,16 +108,54 @@ class App extends React.Component {
   }
 
   render() {
+    const deleteStyleLater = {
+      display: 'flex',
+      justifyContent: 'center',
+    };
+
+    const containerStyle = {
+      border: '1px solid black',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      width: '25%',
+      padding: '.5em',
+    };
+
+    const infoStyle = {
+      textAlign: 'left',
+      width: '80%',
+      paddingTop: '.75em',
+      paddingBottom: '1em',
+      marginBottom: '.5em',
+    };
+
+    const priceStyle = {
+      borderBottom: '1px solid grey',
+    };
+
+    const calendar = {
+      currentCalendarDatesUnavailable: this.state.currentCalendarDatesUnavailable,
+      firstDayPosition: this.state.firstDayPosition,
+      numberOfDaysInMonth: this.state.numberOfDaysInMonth,
+      currentMonthName: this.state.currentMonthName,
+      currentYear: this.state.currentYear,
+      incrementCalendar: this.incrementCalendar,
+      decrementCalendar: this.decrementCalendar,
+    }
+
     return (
-      <div className="app">
-        <Calendar
-          daysUnav={this.state.currentCalendarDatesUnavailable}
-          firstDayPosition={this.state.firstDayPosition}
-          daysInMonth={this.state.numberOfDaysInMonth}
-          currentYearMonth={`${this.state.currentMonthName} ${this.state.currentYear}`}
-          incrementCalendar={this.incrementCalendar}
-          decrementCalendar={this.decrementCalendar}
-        />
+      <div style={deleteStyleLater}>
+        <form style={containerStyle} className="app">
+          <div style={Object.assign(priceStyle, infoStyle)}>
+            ${this.state.baseRate} per night
+          </div>
+          <CheckIO calendar={calendar} />
+          <Guests currentGuestSum={this.state.currentGuestSum} />
+          <div>
+            <button>Request to Book</button>
+          </div>
+        </form>
       </div>
     );
   }
