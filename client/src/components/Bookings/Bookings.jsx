@@ -21,7 +21,7 @@ class Bookings extends React.Component {
     const initMonth = date.getUTCMonth();
 
     this.state = {
-      listingId: 1001,
+      listingId: 0,
       baseRate: 0,
       cleaningFee: 0,
       maxGuests: 0,
@@ -29,24 +29,19 @@ class Bookings extends React.Component {
       occupancyTaxes: 0,
       serviceFee: 0,
       totalCost: 0,
-
       currentYear: initYear,
       currentMonth: initMonth,
-
       currentMonthName: '',
       firstDayPosition: 0,
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
-
       selectedCheckInDate: '',
       selectedCheckOutDate: '',
       numberOfNightsSelected: 0,
-
       currentGuestSum: 0,
       currentAdultSum: 1,
       currentChildSum: 0,
       currentInfantSum: 0,
-
       allIncButtonsActive: true,
       adultDecButtonActive: false,
       childDecButtonActive: false,
@@ -62,9 +57,7 @@ class Bookings extends React.Component {
   }
 
   componentDidMount() {
-    this.getListing();
-    this.getCalendar();
-    this.sumGuests();
+    this.urlChange();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -140,6 +133,27 @@ class Bookings extends React.Component {
       .catch((err) => {
         console.log('ERROR GETTING CALENDAR DATA: ', err);
       });
+  }
+
+  setInitialState(id) {
+    this.setState({
+      listingId: id,
+    }, () => {
+      this.getListing();
+      this.getCalendar();
+      this.sumGuests();
+    });
+  }
+
+  urlChange() {
+    let id = window.location.pathname;
+    if (id === '/listings/' || id === '/') {
+      this.setInitialState(1001);
+    } else {
+      id = id.replace(/\/listings/g, '');
+      id = id.replace(/\//g, '');
+      this.setInitialState(id);
+    }
   }
 
   incrementCalendar() {
