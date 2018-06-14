@@ -1,3 +1,5 @@
+USE bookings_module;
+
 insert into unavailable_dates (id, date_booked, listing_id) values (1, '2018-08-04', 1005);
 insert into unavailable_dates (id, date_booked, listing_id) values (2, '2018-12-18', 1009);
 insert into unavailable_dates (id, date_booked, listing_id) values (3, '2019-01-04', 1007);

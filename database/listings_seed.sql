@@ -1,3 +1,5 @@
+USE bookings_module;
+
 insert into listings (id, base_rate_per_night, max_guests, cleaning_fee) values (1001, 224, 4, 134);
 insert into listings (id, base_rate_per_night, max_guests, cleaning_fee) values (1002, 101, 2, 121);
 insert into listings (id, base_rate_per_night, max_guests, cleaning_fee) values (1003, 156, 4, 42);
