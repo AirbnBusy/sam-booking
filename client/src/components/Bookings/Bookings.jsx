@@ -10,9 +10,9 @@ import {
   PriceWrapper,
   BookButtonWrapper,
   BookButton,
-} from './AppStyles';
+} from './BookingsStyles';
 
-class App extends React.Component {
+class Bookings extends React.Component {
   constructor(props) {
     super(props);
 
@@ -92,8 +92,8 @@ class App extends React.Component {
 
   setVariableCosts() {
     const baseRateXNights = this.state.baseRate * this.state.numberOfNightsSelected;
-    const serviceFee = Math.ceil(.10 * (baseRateXNights + this.state.cleaningFee));
-    const occupancyTaxes = Math.ceil(.11 * (baseRateXNights + this.state.cleaningFee));
+    const serviceFee = Math.ceil(0.10 * (baseRateXNights + this.state.cleaningFee));
+    const occupancyTaxes = Math.ceil(0.11 * (baseRateXNights + this.state.cleaningFee));
     const totalCost = baseRateXNights + serviceFee + occupancyTaxes;
     this.setState({
       baseRateXNights,
@@ -104,7 +104,7 @@ class App extends React.Component {
   }
 
   getListing() {
-    return axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/bookings/listingInfo`)
+    return axios.get(`/api/listings/${this.state.listingId}/bookings/listingInfo`)
       .then((res) => {
         const { data } = res;
         this.setState({
@@ -126,9 +126,8 @@ class App extends React.Component {
       `${this.state.currentMonth.toString()}`;
     const yearMonthString = `${yearString}${monthString}`;
 
-    axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/bookings/calendar/${yearMonthString}`)
+    axios.get(`/api/listings/${this.state.listingId}/bookings/calendar/${yearMonthString}`)
       .then((res) => {
-        console.log(res);
         const { data } = res;
         this.setState({
           currentCalendarDatesUnavailable: data.days,
@@ -327,4 +326,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Bookings;
