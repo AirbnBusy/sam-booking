@@ -17,4 +17,5 @@ RUN npm install
 EXPOSE 3001
 
 # How do you start your app?
+CMD [ "npm", "build" ]
 CMD [ "npm", "start" ]
