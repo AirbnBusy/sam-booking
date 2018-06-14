@@ -20,29 +20,40 @@ class App extends React.Component {
       currentYear: initYear,
       currentMonth: initMonth,
 
-      currentMonthName: null,
+      currentMonthName: '',
       firstDayPosition: 0,
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
 
-      currentGuestSum: 1,
+      currentGuestSum: 0,
+      allIncButtonsActive: true,
       currentAdultSum: 1,
+      adultDecButtonActive: false,
       currentChildSum: 0,
+      childDecButtonActive: false,
       currentInfantSum: 0,
+      infantDecButtonActive: false,
     };
 
     this.incrementCalendar = this.incrementCalendar.bind(this);
     this.decrementCalendar = this.decrementCalendar.bind(this);
+    this.incrementGuests = this.incrementGuests.bind(this);
+    this.decrementGuests = this.decrementGuests.bind(this);
   }
 
   componentDidMount() {
     this.getListing();
     this.getCalendar();
+    this.sumGuests();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentMonth !== this.state.currentMonth) {
       this.getCalendar();
+    } else if (prevState.currentAdultSum !== this.state.currentAdultSum ||
+              prevState.currentChildSum !== this.state.currentChildSum ||
+              prevState.currentInfantSum !== this.state.currentInfantSum) {
+      this.sumGuests();
     }
   }
 
@@ -107,6 +118,69 @@ class App extends React.Component {
     }
   }
 
+  incrementGuests(guestType) {
+    if (guestType === 'adult') {
+      this.setState(prevState => ({
+        currentAdultSum: prevState.currentAdultSum + 1,
+        adultDecButtonActive: true,
+      }));
+    } else if (guestType === 'child') {
+      this.setState(prevState => ({
+        currentChildSum: prevState.currentChildSum + 1,
+        childDecButtonActive: true,
+      }));
+    } else {
+      this.setState(prevState => ({
+        currentInfantSum: prevState.currentInfantSum + 1,
+        infantDecButtonActive: true,
+      }));
+    }
+  }
+
+  decrementGuests(guestType) {
+    if (guestType === 'adult') {
+      this.setState(prevState => ({
+        currentAdultSum: prevState.currentAdultSum > 1 ?
+          prevState.currentAdultSum - 1 :
+          prevState.currentAdultSum,
+        adultDecButtonActive: prevState.currentAdultSum !== 2,
+        allIncButtonsActive: true,
+      }));
+    } else if (guestType === 'child') {
+      this.setState(prevState => ({
+        currentChildSum: prevState.currentChildSum > 0 ?
+          prevState.currentChildSum - 1 :
+          prevState.currentChildSum,
+        childDecButtonActive: prevState.currentChildSum !== 1,
+        allIncButtonsActive: true,
+      }));
+    } else {
+      this.setState(prevState => ({
+        currentInfantSum: prevState.currentInfantSum > 0 ?
+          prevState.currentInfantSum - 1 :
+          prevState.currentInfantSum,
+        infantDecButtonActive: prevState.currentInfantSum !== 1,
+        allIncButtonsActive: true,
+      }));
+    }
+  }
+
+  sumGuests() {
+    const guestSum = this.state.currentAdultSum
+      + this.state.currentChildSum
+      + this.state.currentInfantSum;
+    if (guestSum === this.state.maxGuests) {
+      this.setState({
+        currentGuestSum: guestSum,
+        allIncButtonsActive: false,
+      });
+    } else {
+      this.setState({
+        currentGuestSum: guestSum,
+      });
+    }
+  }
+
   render() {
     const deleteStyleLater = {
       display: 'flex',
@@ -142,7 +216,21 @@ class App extends React.Component {
       currentYear: this.state.currentYear,
       incrementCalendar: this.incrementCalendar,
       decrementCalendar: this.decrementCalendar,
-    }
+    };
+
+    const guests = {
+      currentGuestSum: this.state.currentGuestSum,
+      currentAdultSum: this.state.currentAdultSum,
+      currentChildSum: this.state.currentChildSum,
+      currentInfantSum: this.state.currentInfantSum,
+      incrementGuests: this.incrementGuests,
+      decrementGuests: this.decrementGuests,
+      maxGuests: this.state.maxGuests,
+      adultDecButtonActive: this.state.adultDecButtonActive,
+      childDecButtonActive: this.state.childDecButtonActive,
+      infantDecButtonActive: this.state.infantDecButtonActive,
+      allIncButtonsActive: this.state.allIncButtonsActive,
+    };
 
     return (
       <div style={deleteStyleLater}>
@@ -151,7 +239,7 @@ class App extends React.Component {
             ${this.state.baseRate} per night
           </div>
           <CheckIO calendar={calendar} />
-          <Guests currentGuestSum={this.state.currentGuestSum} />
+          <Guests guests={guests} />
           <div>
             <button>Request to Book</button>
           </div>

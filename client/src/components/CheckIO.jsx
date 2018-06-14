@@ -27,6 +27,18 @@ class CheckIO extends React.Component {
   }
 
   render() {
+    const {
+      calendar: {
+        currentCalendarDatesUnavailable,
+        firstDayPosition,
+        numberOfDaysInMonth,
+        currentMonthName,
+        currentYear,
+        incrementCalendar,
+        decrementCalendar,
+      },
+    } = this.props;
+
     const infoStyle = {
       textAlign: 'left',
       width: '80%',
@@ -36,21 +48,21 @@ class CheckIO extends React.Component {
     };
 
     const inCalendar = this.state.inCalendarOpen ? (<Calendar
-      daysUnav={this.props.calendar.currentCalendarDatesUnavailable}
-      firstDayPosition={this.props.calendar.firstDayPosition}
-      daysInMonth={this.props.calendar.numberOfDaysInMonth}
-      currentYearMonth={`${this.props.calendar.currentMonthName} ${this.props.calendar.currentYear}`}
-      incrementCalendar={this.props.calendar.incrementCalendar}
-      decrementCalendar={this.props.calendar.decrementCalendar}
+      daysUnav={currentCalendarDatesUnavailable}
+      firstDayPosition={firstDayPosition}
+      daysInMonth={numberOfDaysInMonth}
+      currentYearMonth={`${currentMonthName} ${currentYear}`}
+      incrementCalendar={incrementCalendar}
+      decrementCalendar={decrementCalendar}
     />) : null;
 
     const outCalendar = this.state.outCalendarOpen ? (<Calendar
-      daysUnav={this.props.calendar.currentCalendarDatesUnavailable}
-      firstDayPosition={this.props.calendar.firstDayPosition}
-      daysInMonth={this.props.calendar.numberOfDaysInMonth}
-      currentYearMonth={`${this.props.calendar.currentMonthName} ${this.props.calendar.currentYear}`}
-      incrementCalendar={this.props.calendar.incrementCalendar}
-      decrementCalendar={this.props.calendar.decrementCalendar}
+      daysUnav={currentCalendarDatesUnavailable}
+      firstDayPosition={firstDayPosition}
+      daysInMonth={numberOfDaysInMonth}
+      currentYearMonth={`${currentMonthName} ${currentYear}`}
+      incrementCalendar={incrementCalendar}
+      decrementCalendar={decrementCalendar}
     />) : null;
 
     return (
@@ -72,13 +84,14 @@ class CheckIO extends React.Component {
 
 CheckIO.propTypes = {
   calendar: PropTypes.shape({
-    daysUnav: PropTypes.arrayOf(PropTypes.number).isRequired,
+    currentCalendarDatesUnavailable: PropTypes.arrayOf(PropTypes.number).isRequired,
     firstDayPosition: PropTypes.number.isRequired,
-    daysInMonth: PropTypes.number.isRequired,
-    currentYearMonth: PropTypes.string.isRequired,
+    numberOfDaysInMonth: PropTypes.number.isRequired,
+    currentYear: PropTypes.number.isRequired,
+    currentMonthName: PropTypes.string.isRequired,
     incrementCalendar: PropTypes.func.isRequired,
     decrementCalendar: PropTypes.func.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default CheckIO;
