@@ -1,41 +1,84 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Date = ({ index, status }) => {
-  const availStyle = {
-    color: 'black',
-  };
+class Date extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const unavailStyle = {
-    color: 'grey',
-    textDecoration: 'line-through',
-  };
+    this.state = {
+      hover: false,
+    };
+  }
 
-  const blankStyle = {
-    backgroundColor: 'grey',
-  };
+  toggleHover() {
+    this.setState(prevState => ({
+      hover: !prevState.hover,
+    }));
+  }
 
-  const availDate = status === 'available' ?
-    (<div style={availStyle}> {index} </div>) : null;
+  render() {
+    const {
+      status,
+      day,
+      month,
+      year,
+      selectDate,
+      toggleCalendar,
+    } = this.props;
 
-  const unavailDate = status === 'unavailable' ?
-    (<div style={unavailStyle}> {index} </div>) : null;
+    const availStyle = {
+      color: 'black',
+      cursor: 'pointer',
+      backgroundColor: this.state.hover ? 'grey' : 'inherit',
+    };
 
-  const blankDate = status === 'blank' ?
-    (<div style={blankStyle} />) : null;
+    const unavailStyle = {
+      color: 'grey',
+      textDecoration: 'line-through',
+      cursor: 'pointer',
+    };
 
-  return (
-    <div className="date">
-      {availDate}
-      {unavailDate}
-      {blankDate}
-    </div>
-  );
-};
+    const blankStyle = {
+      backgroundColor: 'grey',
+    };
+
+    const availDate = status === 'available' ? (
+      <div
+        id={`date_${day}`}
+        style={availStyle}
+        onMouseEnter={() => this.toggleHover()}
+        onMouseLeave={() => this.toggleHover()}
+        onClick={() => {
+          selectDate(`${month}/${day}/${year}`);
+          toggleCalendar();
+        }}
+      >
+        {day}
+      </div>) : null;
+
+    const unavailDate = status === 'unavailable' ?
+      (<div style={unavailStyle}> {day} </div>) : null;
+
+    const blankDate = status === 'blank' ?
+      (<div style={blankStyle} />) : null;
+
+    return (
+      <div className="date">
+        {availDate}
+        {unavailDate}
+        {blankDate}
+      </div>
+    );
+  }
+}
 
 Date.propTypes = {
   status: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
+  day: PropTypes.number,
+  month: PropTypes.number,
+  year: PropTypes.number,
+  selectDate: PropTypes.func,
+  toggleCalendar: PropTypes.func,
 };
 
 export default Date;

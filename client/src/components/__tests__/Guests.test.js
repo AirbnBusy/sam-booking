@@ -2,12 +2,10 @@ import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
-import chai from 'chai';
+import { expect } from 'chai';
 import Guests from '../Guests';
 
 configure({ adapter: new Adapter() });
-
-const { expect } = chai;
 
 describe('Guests Component', () => {
   const guests = {

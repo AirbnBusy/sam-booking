@@ -65,7 +65,7 @@ class Guests extends React.Component {
           -
           </button>
           {currentAdultSum}
-          <button 
+          <button
             type="button"
             id="adultInc"
             onClick={() => incrementGuests('adult')}
@@ -85,7 +85,7 @@ class Guests extends React.Component {
           -
           </button>
           {currentChildSum}
-          <button 
+          <button
             type="button"
             id="childInc"
             onClick={() => incrementGuests('child')}
@@ -113,9 +113,7 @@ class Guests extends React.Component {
 
     return (
       <div style={infoStyle} className="guests">
-        <label>
-          Guests
-        </label>
+        Guests
         <div>
           <input readOnly id="guestInput" value={guestSum} onClick={() => this.handleClick()} />
         </div>

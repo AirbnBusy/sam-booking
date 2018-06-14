@@ -6,26 +6,43 @@ const Calendar = ({
   firstDayPosition,
   daysUnav,
   daysInMonth,
+  currentYear,
+  currentMonth,
   currentYearMonth,
   incrementCalendar,
   decrementCalendar,
+  selectedCheckInDate,
+  selectedCheckOutDate,
+  selectDate,
+  toggleCalendar,
 }) => {
   const firstBlankDates = Array.from(Array(firstDayPosition).keys())
-    .map(day => <Date key={day} index={0} status="blank" />);
+    .map(day => <Date key={day} day={0} status="blank" />);
 
   const monthDates = Array.from(new Array(daysInMonth), (val, index) => index + 1)
     .map((day) => {
       if (daysUnav.indexOf(day) === -1) {
-        return <Date key={day} index={day} status="available" />;
+        return (
+          <Date
+            key={day}
+            day={day}
+            status="available"
+            selectDate={selectDate}
+            year={currentYear}
+            month={currentMonth}
+            toggleCalendar={toggleCalendar}
+          />
+        );
       }
-      return <Date key={day} index={day} status="unavailable" />;
+      return <Date key={day} day={day} status="unavailable" />;
     });
 
   const wrapperStyle = {
     backgroundColor: 'lightblue',
     width: '55%',
     textAlign: 'center',
-    zIndex: '1',
+    position: 'absolute',
+    zIndex: 1,
   };
 
   const gridStyle = {
@@ -59,9 +76,15 @@ Calendar.propTypes = {
   daysUnav: PropTypes.arrayOf(PropTypes.number).isRequired,
   firstDayPosition: PropTypes.number.isRequired,
   daysInMonth: PropTypes.number.isRequired,
+  currentYear: PropTypes.number.isRequired,
+  currentMonth: PropTypes.number.isRequired,
   currentYearMonth: PropTypes.string.isRequired,
   incrementCalendar: PropTypes.func.isRequired,
   decrementCalendar: PropTypes.func.isRequired,
+  selectedCheckInDate: PropTypes.string.isRequired,
+  selectedCheckOutDate: PropTypes.string.isRequired,
+  selectDate: PropTypes.func.isRequired,
+  toggleCalendar: PropTypes.func.isRequired,
 };
 
 export default Calendar;

@@ -25,6 +25,10 @@ class App extends React.Component {
       numberOfDaysInMonth: 0,
       currentCalendarDatesUnavailable: [],
 
+      selectedCheckInDate: '',
+      selectedCheckOutDate: '',
+      numberOfDaysSelected: 0,
+
       currentGuestSum: 0,
       allIncButtonsActive: true,
       currentAdultSum: 1,
@@ -37,6 +41,8 @@ class App extends React.Component {
 
     this.incrementCalendar = this.incrementCalendar.bind(this);
     this.decrementCalendar = this.decrementCalendar.bind(this);
+    this.selectCheckInDate = this.selectCheckInDate.bind(this);
+    this.selectCheckOutDate = this.selectCheckOutDate.bind(this);
     this.incrementGuests = this.incrementGuests.bind(this);
     this.decrementGuests = this.decrementGuests.bind(this);
   }
@@ -54,6 +60,9 @@ class App extends React.Component {
               prevState.currentChildSum !== this.state.currentChildSum ||
               prevState.currentInfantSum !== this.state.currentInfantSum) {
       this.sumGuests();
+    } else if (prevState.selectedCheckInDate !== this.state.selectedCheckInDate ||
+              prevState.selectedCheckOutDate !== this.state.selectedCheckOutDate) {
+      this.sumDates();
     }
   }
 
@@ -116,6 +125,33 @@ class App extends React.Component {
         currentMonth: 11,
         currentYear: prevState.currentYear - 1,
       }));
+    }
+  }
+
+  selectCheckInDate(selectedDate) {
+    const inDate = new Date(selectedDate);
+    const dateStr = inDate.toLocaleDateString();
+    this.setState({
+      selectedCheckInDate: dateStr,
+    });
+  }
+
+  selectCheckOutDate(selectedDate) {
+    const outDate = new Date(selectedDate);
+    const dateStr = outDate.toLocaleDateString();
+    this.setState({
+      selectedCheckOutDate: dateStr,
+    });
+  }
+
+  sumDates() {
+    const inDate = new Date(this.state.selectedCheckInDate);
+    const outDate = new Date(this.state.selectedCheckOutDate);
+    if (inDate && outDate) {
+      const numberOfDaysSelected = Math.abs(outDate - inDate) / 86400000;
+      this.setState({
+        numberOfDaysSelected,
+      });
     }
   }
 
@@ -214,9 +250,14 @@ class App extends React.Component {
       firstDayPosition: this.state.firstDayPosition,
       numberOfDaysInMonth: this.state.numberOfDaysInMonth,
       currentMonthName: this.state.currentMonthName,
+      currentMonth: this.state.currentMonth,
       currentYear: this.state.currentYear,
       incrementCalendar: this.incrementCalendar,
       decrementCalendar: this.decrementCalendar,
+      selectedCheckInDate: this.state.selectedCheckInDate,
+      selectedCheckOutDate: this.state.selectedCheckOutDate,
+      selectCheckInDate: this.selectCheckInDate,
+      selectCheckOutDate: this.selectCheckOutDate,
     };
 
     const guests = {
