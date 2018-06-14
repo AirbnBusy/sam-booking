@@ -12,10 +12,10 @@ COPY . /src/app
 
 # Does your app have any dependencies that should be installed?
 RUN npm install
+RUN npm build
 
 # What port will the container talk to the outside world with once created?
 EXPOSE 3001
 
 # How do you start your app?
-CMD [ "npm", "build" ]
 CMD [ "npm", "start" ]
