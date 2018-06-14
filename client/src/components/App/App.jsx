@@ -1,8 +1,16 @@
 import React from 'react';
 import axios from 'axios';
-import CheckIO from './CheckIO';
-import Guests from './Guests';
-import Summary from './Summary';
+import CheckIO from '../CheckIO/CheckIO';
+import Guests from '../Guests/Guests';
+import Summary from '../Summary/Summary';
+import {
+  Price,
+  PerNight,
+  AppWrapper,
+  PriceWrapper,
+  BookButtonWrapper,
+  BookButton,
+} from './AppStyles';
 
 class App extends React.Component {
   constructor(props) {
@@ -62,16 +70,22 @@ class App extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentMonth !== this.state.currentMonth) {
       this.getCalendar();
-    } else if (prevState.currentAdultSum !== this.state.currentAdultSum ||
-              prevState.currentChildSum !== this.state.currentChildSum ||
-              prevState.currentInfantSum !== this.state.currentInfantSum) {
+    } else if (
+      prevState.currentAdultSum !== this.state.currentAdultSum
+        || prevState.currentChildSum !== this.state.currentChildSum
+        || prevState.currentInfantSum !== this.state.currentInfantSum
+    ) {
       this.sumGuests();
-    } else if (prevState.selectedCheckInDate !== this.state.selectedCheckInDate ||
-              prevState.selectedCheckOutDate !== this.state.selectedCheckOutDate) {
+    } else if (
+      prevState.selectedCheckInDate !== this.state.selectedCheckInDate
+        || prevState.selectedCheckOutDate !== this.state.selectedCheckOutDate
+    ) {
       this.sumDates();
-    } else if (this.state.numberOfNightsSelected
-              && this.state.baseRate
-              && prevState.numberOfNightsSelected !== this.state.numberOfNightsSelected) {
+    } else if (
+      this.state.numberOfNightsSelected
+        && this.state.baseRate
+        && prevState.numberOfNightsSelected !== this.state.numberOfNightsSelected
+    ) {
       this.setVariableCosts();
     }
   }
@@ -115,7 +129,6 @@ class App extends React.Component {
     axios.get(`http://localhost:3001/api/listings/${this.state.listingId}/calendar/${yearMonthString}`)
       .then((res) => {
         const { data } = res;
-        console.log(data);
         this.setState({
           currentCalendarDatesUnavailable: data.days,
           firstDayPosition: data.firstDayOfMonth,
@@ -242,30 +255,9 @@ class App extends React.Component {
   }
 
   render() {
-    const deleteStyleLater = {
+    const DELETE_DIV_AND_STYLE_LATER = {
       display: 'flex',
       justifyContent: 'center',
-    };
-
-    const containerStyle = {
-      border: '1px solid black',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '25%',
-      padding: '.5em',
-    };
-
-    const infoStyle = {
-      textAlign: 'left',
-      width: '80%',
-      paddingTop: '.75em',
-      paddingBottom: '1em',
-      marginBottom: '.5em',
-    };
-
-    const priceStyle = {
-      borderBottom: '1px solid grey',
     };
 
     const calendar = {
@@ -310,23 +302,25 @@ class App extends React.Component {
     const summaryComponent = (
       this.state.currentGuestSum
       && this.state.selectedCheckInDate
-      && this.state.selectedCheckOutDate)
+      && this.state.selectedCheckOutDate
+    )
       ? (<Summary summary={summary} />)
       : null;
 
     return (
-      <div style={deleteStyleLater}>
-        <form style={containerStyle} className="app">
-          <div style={Object.assign(priceStyle, infoStyle)}>
-            {`$${this.state.baseRate} per night`}
-          </div>
+      <div style={DELETE_DIV_AND_STYLE_LATER}>
+        <AppWrapper className="app">
+          <PriceWrapper>
+            <Price>{`$${this.state.baseRate}`}</Price>
+            <PerNight>per night</PerNight>
+          </PriceWrapper>
           <CheckIO calendar={calendar} />
           <Guests guests={guests} />
           {summaryComponent}
-          <div>
-            <button>Request to Book</button>
-          </div>
-        </form>
+          <BookButtonWrapper>
+            <BookButton>Request to Book</BookButton>
+          </BookButtonWrapper>
+        </AppWrapper>
       </div>
     );
   }

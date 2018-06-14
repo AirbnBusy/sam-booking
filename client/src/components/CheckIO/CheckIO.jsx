@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Calendar from './Calendar';
+import Calendar from '../Calendar/Calendar';
+import { CheckIOInput, CheckIOInputWrapper } from './CheckIOStyles';
+import { FieldLabel, FieldWrapper } from '../Guests/GuestsStyles';
 
 class CheckIO extends React.Component {
   constructor(props) {
@@ -17,17 +19,10 @@ class CheckIO extends React.Component {
 
   toggleCalendar(calendarType) {
     if (calendarType === 'in') {
-      if (this.state.inCalendarOpen && !this.props.calendar.selectedCheckOutDate) {
-        this.setState(prevState => ({
-          inCalendarOpen: !prevState.inCalendarOpen,
-          outCalendarOpen: true,
-        }));
-      } else {
-        this.setState(prevState => ({
-          inCalendarOpen: !prevState.inCalendarOpen,
-          outCalendarOpen: false,
-        }));
-      }
+      this.setState(prevState => ({
+        inCalendarOpen: !prevState.inCalendarOpen,
+        outCalendarOpen: false,
+      }));
     } else if (calendarType === 'out') {
       this.setState(prevState => ({
         inCalendarOpen: false,
@@ -53,20 +48,6 @@ class CheckIO extends React.Component {
         selectCheckOutDate,
       },
     } = this.props;
-
-    const infoStyle = {
-      textAlign: 'left',
-      width: '80%',
-      paddingTop: '.75em',
-      paddingBottom: '1em',
-      marginBottom: '.5em',
-    };
-
-    const inOutStyle = {
-      display: 'flex',
-      justifyContent: 'space-between',
-      position: 'relative',
-    };
 
     const inCalendar = this.state.inCalendarOpen ? (<Calendar
       id="inCal"
@@ -103,31 +84,54 @@ class CheckIO extends React.Component {
     const inDate = selectedCheckInDate || '';
     const outDate = selectedCheckOutDate || '';
 
+    const arrow = (
+      <svg
+        viewBox="0 0 24 24"
+        role="presentation"
+        aria-hidden="true"
+        focusable="false"
+        style={{
+          height: '24px',
+          width: '24px',
+          display: 'block',
+          fill: 'currentColor',
+        }}
+      >
+        <path
+          d="m0 12.5a.5.5 0 0 0 .5.5h21.79l-6.15 6.15a.5.5 0 1 0
+            .71.71l7-7v-.01a.5.5 0 0 0 .14-.35.5.5 0 0 0
+            -.14-.35v-.01l-7-7a .5.5 0 0 0 -.71.71l6.15
+            6.15h-21.79a.5.5 0 0 0 -.5.5z"
+          fillRule="evenodd"
+        />
+      </svg>
+    );
+
     return (
-      <div style={infoStyle}>
-        Dates
-        <div style={inOutStyle}>
-          <div>
-            <input
-              id="checkIn"
-              placeholder="Check In"
-              value={inDate}
-              onClick={() => this.toggleCalendar('in')}
-            />
-            {inCalendar}
-          </div>
-          -&gt;
-          <div>
-            <input
-              id="checkOut"
-              placeholder="Check Out"
-              value={outDate}
-              onClick={() => this.toggleCalendar('out')}
-            />
-            {outCalendar}
-          </div>
-        </div>
-      </div>
+      <FieldWrapper>
+        <FieldLabel>
+          <span>Dates</span>
+        </FieldLabel>
+        <CheckIOInputWrapper>
+          <CheckIOInput
+            calendarOpen={this.state.inCalendarOpen}
+            id="checkIn"
+            placeholder="Check In"
+            value={inDate}
+            onClick={() => this.inToggleCalendar()}
+          />
+          {arrow}
+          <CheckIOInput
+            calendarOpen={this.state.outCalendarOpen}
+            id="checkOut"
+            placeholder="Check Out"
+            value={outDate}
+            onClick={() => this.outToggleCalendar()}
+          />
+        </CheckIOInputWrapper>
+        {inCalendar}
+        {outCalendar}
+      </FieldWrapper>
     );
   }
 }

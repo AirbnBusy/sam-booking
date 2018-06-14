@@ -3,7 +3,7 @@ import { configure, shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai';
-import Date from '../Date';
+import Date from '../Date/Date';
 
 configure({ adapter: new Adapter() });
 

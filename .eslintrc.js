@@ -10,9 +10,9 @@ module.exports = {
     "import", 
     "jsx-a11y", 
     "react",
-    "sql"
+    "sql",
   ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   }
 };
