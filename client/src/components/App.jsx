@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CheckIO from './CheckIO';
 import Guests from './Guests';
+import Summary from './Summary';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,10 @@ class App extends React.Component {
       baseRate: 0,
       cleaningFee: 0,
       maxGuests: 0,
+      baseRateXNights: 0,
+      occupancyTaxes: 0,
+      serviceFee: 0,
+      totalCost: 0,
 
       currentYear: initYear,
       currentMonth: initMonth,
@@ -27,15 +32,16 @@ class App extends React.Component {
 
       selectedCheckInDate: '',
       selectedCheckOutDate: '',
-      numberOfDaysSelected: 0,
+      numberOfNightsSelected: 0,
 
       currentGuestSum: 0,
-      allIncButtonsActive: true,
       currentAdultSum: 1,
-      adultDecButtonActive: false,
       currentChildSum: 0,
-      childDecButtonActive: false,
       currentInfantSum: 0,
+
+      allIncButtonsActive: true,
+      adultDecButtonActive: false,
+      childDecButtonActive: false,
       infantDecButtonActive: false,
     };
 
@@ -63,7 +69,24 @@ class App extends React.Component {
     } else if (prevState.selectedCheckInDate !== this.state.selectedCheckInDate ||
               prevState.selectedCheckOutDate !== this.state.selectedCheckOutDate) {
       this.sumDates();
+    } else if (this.state.numberOfNightsSelected
+              && this.state.baseRate
+              && prevState.numberOfNightsSelected !== this.state.numberOfNightsSelected) {
+      this.setVariableCosts();
     }
+  }
+
+  setVariableCosts() {
+    const baseRateXNights = this.state.baseRate * this.state.numberOfNightsSelected;
+    const serviceFee = Math.ceil(.10 * (baseRateXNights + this.state.cleaningFee));
+    const occupancyTaxes = Math.ceil(.11 * (baseRateXNights + this.state.cleaningFee));
+    const totalCost = baseRateXNights + serviceFee + occupancyTaxes;
+    this.setState({
+      baseRateXNights,
+      occupancyTaxes,
+      serviceFee,
+      totalCost,
+    });
   }
 
   getListing() {
@@ -148,9 +171,9 @@ class App extends React.Component {
     const inDate = new Date(this.state.selectedCheckInDate);
     const outDate = new Date(this.state.selectedCheckOutDate);
     if (inDate && outDate) {
-      const numberOfDaysSelected = Math.abs(outDate - inDate) / 86400000;
+      const numberOfNightsSelected = Math.abs(outDate - inDate) / 86400000;
       this.setState({
-        numberOfDaysSelected,
+        numberOfNightsSelected,
       });
     }
   }
@@ -274,14 +297,32 @@ class App extends React.Component {
       allIncButtonsActive: this.state.allIncButtonsActive,
     };
 
+    const summary = {
+      cleaningFee: this.state.cleaningFee,
+      baseRate: this.state.baseRate,
+      numberOfNightsSelected: this.state.numberOfNightsSelected,
+      baseRateXNights: this.state.baseRateXNights,
+      occupancyTaxes: this.state.occupancyTaxes,
+      serviceFee: this.state.serviceFee,
+      totalCost: this.state.totalCost,
+    };
+
+    const summaryComponent = (
+      this.state.currentGuestSum
+      && this.state.selectedCheckInDate
+      && this.state.selectedCheckOutDate)
+      ? (<Summary summary={summary} />)
+      : null;
+
     return (
       <div style={deleteStyleLater}>
         <form style={containerStyle} className="app">
           <div style={Object.assign(priceStyle, infoStyle)}>
-            ${this.state.baseRate} per night
+            {`$${this.state.baseRate} per night`}
           </div>
           <CheckIO calendar={calendar} />
           <Guests guests={guests} />
+          {summaryComponent}
           <div>
             <button>Request to Book</button>
           </div>
