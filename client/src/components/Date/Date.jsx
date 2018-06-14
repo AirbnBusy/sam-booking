@@ -95,4 +95,8 @@ Date.propTypes = {
   toggleCalendar: PropTypes.func,
 };
 
+DateContainer.displayName = 'DateContainer';
+AvailableDate.displayName = 'AvailableDate';
+UnavailableDate.displayName = 'UnavailableDate';
+
 export default Date;

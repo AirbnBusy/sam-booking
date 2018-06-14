@@ -46,7 +46,7 @@ describe('Calendar Component', () => {
   });
 
   it('should render the total amount of date divs "blank", "available", and "unavailable"', () => {
-    expect(wrapperCal.find('CalendarGrid').children().length).to.equal(35);
+    expect(wrapperCal.find('CalendarGrid Date').length).to.equal(35);
   });
 
   it('should respond to click event with increment function call', () => {

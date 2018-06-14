@@ -30,16 +30,16 @@ describe('Date Component', () => {
   />);
 
   it('should call selectDate and toggleCalendar on click', () => {
-    shallowDate.find('#date_5').simulate('click');
+    shallowDate.find('AvailableDate').simulate('click');
     expect(selectDate).to.have.property('callCount', 1);
     expect(toggleCalendar).to.have.property('callCount', 1);
   });
 
   it('should toggleHover when date is hovered', () => {
-    expect(wrapperDate.state().hover).to.equal(false);
-    wrapperDate.find('#date_5').simulate('mouseEnter');
-    expect(wrapperDate.state().hover).to.equal(true);
-    wrapperDate.find('#date_5').simulate('mouseEnter');
-    expect(wrapperDate.state().hover).to.equal(false);
+    expect(wrapperDate.state().hovered).to.equal(false);
+    wrapperDate.find('AvailableDate').simulate('mouseEnter');
+    expect(wrapperDate.state().hovered).to.equal(true);
+    wrapperDate.find('AvailableDate').simulate('mouseEnter');
+    expect(wrapperDate.state().hovered).to.equal(false);
   });
 });

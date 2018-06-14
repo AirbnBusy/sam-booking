@@ -9,11 +9,7 @@ const app = express();
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyParser.json());
 
-app.get('/listings/:listingId', (req, res) => {
-  res.redirect('/');
-});
-
-app.get('/api/listings/:listingId', (req, res) => {
+app.get('/api/listings/:listingId/bookings/listingInfo', (req, res) => {
   db.getListingInfo(req.params.listingId)
     .then((rows) => {
       res.send(rows[0]);
@@ -23,7 +19,7 @@ app.get('/api/listings/:listingId', (req, res) => {
     });
 });
 
-app.get('/api/listings/:listingId/calendar/:yearMonth', (req, res) => {
+app.get('/api/listings/:listingId/bookings/calendar/:yearMonth', (req, res) => {
   const month = req.params.yearMonth.substring(4);
   const year = req.params.yearMonth.substring(0, 4);
 
