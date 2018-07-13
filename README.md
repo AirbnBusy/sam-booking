@@ -5,16 +5,16 @@
 Goal Screenshots Below
 
 Step 1 - Booking Module on screen load
-<img src="/misc/onScreenLoadShot.png" width="40%">
+<img src="/misc/onScreenLoadShot.png" width="40%" display="block">
 
 Step 2 - On Check In Selection
-<img src="/misc/onCheckInDateShot.png" width="40%">
+<img src="/misc/onCheckInDateShot.png" width="40%" display="block">
 
 Step 3 - On Check Out Date Selection
-<img src="/misc/onCheckOutDateShot.png" width="40%">
+<img src="/misc/onCheckOutDateShot.png" width="40%" display="block">
 
 Step 4 - Post Chosen Date Range Summary Page
-<img src="/misc/postChosenDateRangeShot.png" width="40%">
+<img src="/misc/postChosenDateRangeShot.png" width="40%" display="block">
 
 ## Related Projects
 
