@@ -2,7 +2,10 @@
 
 > Recreating Airbnb's Booking Module on an Airbnb listing page.
 
-Goal Screenshots Below
+# Final Product Demo
+<a href="https://www.youtube.com/watch?v=n_BQuO1Eb2w">Demo Video</a>
+
+# Goal Screenshots (below)
 
 <div>Step 1 - Booking Module on screen load</div>
 <img src="/misc/onScreenLoadShot.png" width="40%" display="block">
