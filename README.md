@@ -2,6 +2,11 @@
 
 > Recreating Airbnb's Booking Module on an Airbnb listing page.
 
+- Built interactive microservice using React for modular UI
+- Created custom calendar with CSS Grid and Styled Components to render dynamic date elements
+- Implemented proxy server with Express to combine 4 separate microservices in one SPA
+- Deployed microservice and MySQL DB  with Docker and AWS (EC2+RDS) to streamline integration
+
 # Final Product Demo
 <a href="https://www.youtube.com/watch?v=n_BQuO1Eb2w">Demo Video</a>
 
